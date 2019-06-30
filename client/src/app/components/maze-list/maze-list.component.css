@@ -1,0 +1,29 @@
+ .badge.size {
+	padding-top: 0.1em;
+	color: #fbfdfa;
+	font-size: 15px;
+	margin: auto;
+}
+ .title {
+	font-size: 20px;
+}
+ .size-small {
+	background-color: #42ebf4;
+}
+ .size-medium {
+	background-color: #92cf5c;
+}
+ .size-large {
+    background-color: #dd0d1e;
+}
+.choose {
+   font-size: 30px;
+   background-color: #F46E2B;
+}
+
+ .single {
+	padding-top: 0.6em;
+	color: #fbfdfa;
+	font-size: 12px;
+	background-color: #42ebf4;
+}

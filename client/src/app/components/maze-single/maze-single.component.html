@@ -1,0 +1,39 @@
+<div class = 'container' *ngIf = 'to_show'>
+  <app-navbar></app-navbar>
+  <br/>
+  <br/>
+    <div (window:beforeunload)="saveProcess()"></div>
+    <div class = 'timer'>
+        <div> Welcome, {{uname}} !</div>
+        <div> Time used: {{timecount.toFixed(2)}}s. </div>
+        <button type = 'button' class = 'btn btn-primary'
+        (click) = 'StartOrReset()'> {{buttonmessage}}  </button>
+    </div>
+    <canvas #canvas> </canvas>
+    
+    <button type="button" #modalOn data-toggle="modal" data-target="#selectModal" [hidden] = 'true'>
+        test
+    </button>
+
+    <div class="modal fade"  id="selectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Restore Process</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Would you like to restore the game last time?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                          (click) = 'resetProcess()'>No</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal"
+                          >Yes</button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+</div>

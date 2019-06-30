@@ -1,0 +1,33 @@
+<div class = 'container signin'>
+<app-navbar></app-navbar>
+  <br/>
+  <br/>
+<form #formRef = 'ngForm'>
+  <div class="form-group">
+    <label for="exampleInputUsername">User Name:</label>
+    <input type="username" class="form-control" id="exampleInputUsername" 
+      [(ngModel)] = 'uname' name = 'username'
+      required placeholder="Enter username">
+    <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword" 
+      [(ngModel)] = 'password' name = 'password'
+      required placeholder="Enter password">
+  </div>
+  <div *ngIf='password !== confirmPassword && confirmPassword' class="alert alert-warning" role="alert">
+    Password mismath!
+  </div>
+  <div class="form-group">
+    <label for="exampleInputConfirmPassword">Confirm Password</label>
+    <input type="password" class="form-control" id="exampleInputConfirmPassword" 
+      [(ngModel)] = 'confirmPassword' name = 'confirmPassword'
+      required placeholder="Confirm password">
+  </div>
+  <button type="submit" class="btn btn-primary pull-right" (click) = 'signinCheck()'>Signin</button>
+  <div *ngIf='message' class="alert alert-warning" role="alert">
+    {{message}}
+  </div>
+</form>
+</div>

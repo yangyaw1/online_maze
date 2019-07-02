@@ -11,10 +11,10 @@ import { MazeListComponent } from './components/maze-list/maze-list.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MazeSingleComponent } from './components/maze-single/maze-single.component';
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './auth/token.interceptor';
 import { SigninPageComponent } from './components/signin-page/signin-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MazeCompetitionComponent } from './components/maze-competition/maze-competition.component';
+import { NewMazeComponent } from './components/new-maze/new-maze.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     LoginPageComponent,
     MazeSingleComponent,
     SigninPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    MazeCompetitionComponent,
+    NewMazeComponent
   ],
   imports: [
     BrowserModule,
@@ -32,12 +34,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AppRoutingModule,
     routing
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy  } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Maze } from '../../models/maze.model';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
+import { RoomService } from '../../services/room.service';
 
 @Component({
   selector: 'app-maze-list',
@@ -15,10 +16,18 @@ export class MazeListComponent implements OnInit, OnDestroy  {
   subsriptionMazes: Subscription;
   mazes: Maze[];
   to_show: boolean = false;
+  roomidToCreate: number;
+  roomidToConnect: string;
+  message: string;
+  showError: boolean = false;
+  
+  @ViewChild('modalOn', {static: false}) modalOn:ElementRef;
+  
   constructor(private route: ActivatedRoute, 
   private router: Router,
   private dataService: DataService,
-  private authService: AuthService) { }
+  private authService: AuthService,
+  private roomService: RoomService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -40,6 +49,43 @@ export class MazeListComponent implements OnInit, OnDestroy  {
     this.subsriptionMazes.unsubscribe();
   }
   
+  createRoomid(){
+    this.roomService.getRoomid()
+       .then(roomid => this.roomidToCreate = +roomid.content);
+    // data === parseInt(data, 10)
+  }
+  
+  createRoom(id: number){
+    this.roomService.createRoom(this.uname, this.roomidToCreate, id)
+      .then(roomid => {
+            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToCreate]);
+        }, error => {
+            this.message = 'The room is already in used. Please recreate.'
+            this.modalOn.nativeElement.click();
+            console.log(this.message);
+        });
+    // data === parseInt(data, 10)
+  }
+  
+  joinRoom(id: number){
+    this.roomService.joinRoom(this.uname, +this.roomidToConnect, id)
+      .then(roomid => {
+            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToConnect]);
+        }, error => {
+            this.message = 'Room is not avaiable now!';
+            this.modalOn.nativeElement.click();
+            console.log(this.message);
+        });
+    // data === parseInt(data, 10)
+  }
+  
+  checkValidId() {
+    if(this.roomidToConnect === '' || /^\d+$/.test(this.roomidToConnect)){
+      this.showError = false;
+    } else {
+      this.showError = true;
+    }
+  }
   singleMode(id: number) {
     this.router.navigate(['/login', this.uname, 'mazes', id, 'single']);
   }

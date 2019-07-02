@@ -1,0 +1,94 @@
+<div class='container'>
+<app-navbar></app-navbar>
+<br/>
+<br/>
+<div class = 'timer'> Time used: {{timecount.value.toFixed(2)}}s. </div>
+<div class="row">
+  <div class="col-sm-6">
+        <div class = 'timer'>
+            <div> Player1: {{uname}} !</div>
+            <button type = 'button' class = 'btn btn-primary'
+            (click) = 'waiting()' *ngIf = '!start_on && !is_waiting'> Start  </button>
+            <button type = 'button' class = 'btn btn-primary'
+            *ngIf = '!start_on && is_waiting' [disabled] = 'true'> Ready  </button>
+        </div>
+        <canvas #canvas> </canvas>
+  </div>
+  <div class="col-sm-6">
+        <div class = 'timer'>
+            <div *ngIf = '!oppo_info.is_on'> Waiting for player to join.</div>
+            <div *ngIf = 'oppo_info.is_on'> Player2: {{oppo_info.uname}} !</div>
+            <button type = 'button' class = 'btn btn-primary'
+            *ngIf = '!start_on && !oppo_info.is_waiting' [disabled] = 'true'> Not ready  </button>
+            <button type = 'button' class = 'btn btn-primary'
+            *ngIf = '!start_on && oppo_info.is_waiting' [disabled] = 'true'> Ready  </button>
+        </div>
+        <canvas #canvas_oppo> </canvas>
+  </div>
+</div>
+
+<!--countdown message-->
+<div class="modal fade" id="countdownModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Game will start!</h5>
+            </div>
+            <div class="modal-body">
+              Game will start in {{countdowntime}}s.
+            </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              data-toggle="modal" #modalCountdown [hidden] = 'true'></button>
+        </div>
+    </div>
+</div>
+
+<!--ghost button-->
+<button type="button" #modalOn data-toggle="modal" data-target="#countdownModal" [hidden] = 'true'>
+</button>
+
+<!--gameend message-->
+<div class="modal fade" id="gameendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Game ends!</h5>
+            </div>
+            <div class="modal-body">
+              Winner is {{winner_name}} with total time {{winner_time.value.toFixed(2)}}s used.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              data-toggle="modal" #gameendModalCancel (click) = 'gameendClose()'>cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--ghost button-->
+<button type="button" #modalGameend data-toggle="modal" data-target="#gameendModal" [hidden] = 'true'>
+</button>
+
+<!--oppo disconnect message-->
+<div class="modal fade" id="disconnectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Opponent disconnected!</h5>
+            </div>
+            <div class="modal-body">
+              Opponent disconnected.
+            </div>
+            <div class="modal-footer">
+              <button type="button"  class="btn btn-secondary" data-dismiss="modal"
+              data-toggle="modal" #disconnectModalCancel>cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--ghost button-->
+<button type="button" #modalDisconnect data-toggle="modal" data-target="#disconnectModal" [hidden] = 'true'>
+</button>
+
+</div>

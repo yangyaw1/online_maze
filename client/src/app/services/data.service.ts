@@ -58,6 +58,7 @@ export class DataService {
       
       return this._mazeSource.asObservable();
   }
+
   
   saveProcess(uname: string, mazeid: number, cur: number, timecount: string): Promise<Message>{
     const data = {
@@ -86,6 +87,14 @@ export class DataService {
       .toPromise()
       .then((res: any) => res)
       .catch(this.handleError);
+  }
+  
+  addmaze(maze: Maze): Promise<Maze>{
+    const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
+    return this.httpClient.post(`api/v1/mazes`, maze, options)
+           .toPromise()
+           .then((res:any) => res)
+           .catch(this.handleError);
   }
   
   private handleError(error: any): Promise<any> {

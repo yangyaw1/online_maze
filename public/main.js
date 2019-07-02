@@ -331,6 +331,17 @@ module.exports = "<div class = 'container login' *ngIf='toShow'>\n<app-navbar></
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/components/maze-competition/maze-competition.component.html":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/components/maze-competition/maze-competition.component.html ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class='container'>\n<app-navbar></app-navbar>\n<br/>\n<br/>\n<div class = 'timer'> Time used: {{timecount.value.toFixed(2)}}s. </div>\n<div class=\"row\">\n  <div class=\"col-sm-6\">\n        <div class = 'timer'>\n            <div> Player1: {{uname}} !</div>\n            <button type = 'button' class = 'btn btn-primary'\n            (click) = 'waiting()' *ngIf = '!start_on && !is_waiting'> Start  </button>\n            <button type = 'button' class = 'btn btn-primary'\n            *ngIf = '!start_on && is_waiting' [disabled] = 'true'> Ready  </button>\n        </div>\n        <canvas #canvas> </canvas>\n  </div>\n  <div class=\"col-sm-6\">\n        <div class = 'timer'>\n            <div *ngIf = '!oppo_info.is_on'> Waiting for player to join.</div>\n            <div *ngIf = 'oppo_info.is_on'> Player2: {{oppo_info.uname}} !</div>\n            <button type = 'button' class = 'btn btn-primary'\n            *ngIf = '!start_on && !oppo_info.is_waiting' [disabled] = 'true'> Not ready  </button>\n            <button type = 'button' class = 'btn btn-primary'\n            *ngIf = '!start_on && oppo_info.is_waiting' [disabled] = 'true'> Ready  </button>\n        </div>\n        <canvas #canvas_oppo> </canvas>\n  </div>\n</div>\n\n<!--countdown message-->\n<div class=\"modal fade\" id=\"countdownModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n              <h5 class=\"modal-title\" id=\"exampleModalLabel\">Game will start!</h5>\n            </div>\n            <div class=\"modal-body\">\n              Game will start in {{countdowntime}}s.\n            </div>\n              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n              data-toggle=\"modal\" #modalCountdown [hidden] = 'true'></button>\n        </div>\n    </div>\n</div>\n\n<!--ghost button-->\n<button type=\"button\" #modalOn data-toggle=\"modal\" data-target=\"#countdownModal\" [hidden] = 'true'>\n</button>\n\n<!--gameend message-->\n<div class=\"modal fade\" id=\"gameendModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n              <h5 class=\"modal-title\" id=\"exampleModalLabel\">Game ends!</h5>\n            </div>\n            <div class=\"modal-body\">\n              Winner is {{winner_name}} with total time {{winner_time.value.toFixed(2)}}s used.\n            </div>\n            <div class=\"modal-footer\">\n              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n              data-toggle=\"modal\" #gameendModalCancel (click) = 'gameendClose()'>cancel</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n<!--ghost button-->\n<button type=\"button\" #modalGameend data-toggle=\"modal\" data-target=\"#gameendModal\" [hidden] = 'true'>\n</button>\n\n<!--oppo disconnect message-->\n<div class=\"modal fade\" id=\"disconnectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n              <h5 class=\"modal-title\" id=\"exampleModalLabel\">Opponent disconnected!</h5>\n            </div>\n            <div class=\"modal-body\">\n              Opponent disconnected.\n            </div>\n            <div class=\"modal-footer\">\n              <button type=\"button\"  class=\"btn btn-secondary\" data-dismiss=\"modal\"\n              data-toggle=\"modal\" #disconnectModalCancel>cancel</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n<!--ghost button-->\n<button type=\"button\" #modalDisconnect data-toggle=\"modal\" data-target=\"#disconnectModal\" [hidden] = 'true'>\n</button>\n\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/components/maze-list/maze-list.component.html":
 /*!*****************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/components/maze-list/maze-list.component.html ***!
@@ -338,7 +349,7 @@ module.exports = "<div class = 'container login' *ngIf='toShow'>\n<app-navbar></
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class = 'container' *ngIf = 'to_show'>\n<app-navbar></app-navbar>\n<br/>\n<br/>\n<div class=\"jumbotron\">\n  <h1 class=\"display-4\">Welcome, {{uname}}!</h1>\n  <p class=\"lead\">This is an online maze game platform. Please choose any maze you like to play</p>\n  <hr class=\"my-4\">\n  <p>You can choose single game mode to chanllenge yourself, or choose competition mode to paly against others!</p>\n  <p class=\"lead\">\n    <a class=\"btn btn-primary btn-lg\" href=\"#\" role=\"button\">About the developer</a>\n  </p>\n</div>\n  <div class=\"border border-primary badge choose\"> Choose the maze! </div>\n  <div class = 'list-group'>\n      <a class = 'list-group-item' *ngFor = 'let maze of mazes'>\n          <span class = \"{{'pull-left badge size size-' + maze.size.toLocaleLowerCase()}}\">\n              {{maze.size}}\n          </span>\n          <strong class = 'title'> Maze {{maze.id}} </strong>\n          <button type=\"button\" class=\"btn btn-success float-right\" data-toggle=\"modal\" data-target=\"#selectModal\">\n                Start Game!\n          </button>\n          \n          <div class=\"modal fade\" id=\"selectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Please choose mode</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Please choose single mode or competition mode.\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          (click) = 'singleMode(maze.id)'>Single mode</button>\n                          <button type=\"button\" class=\"btn btn-warning\" data-dismiss=\"modal\"\n                          (click) = 'competitionMode(maze.id)'>Competition mode</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n      </a>\n  </div>\n</div>\n"
+module.exports = "<div class = 'container' *ngIf = 'to_show'>\n<app-navbar></app-navbar>\n<br/>\n<br/>\n<div class=\"jumbotron\">\n  <h1 class=\"display-4\">Welcome, {{uname}}!!!!!</h1>\n  <p class=\"lead\">This is an online maze game platform. Please choose any maze you like to play</p>\n  <hr class=\"my-4\">\n  <p>Want to create a random maze?</p>\n  <p class=\"lead\">\n    <a class=\"btn btn-primary btn-lg\" [routerLink]=\"['/login', uname, 'newmaze']\" role=\"button\">Create random maze</a>\n  </p>\n</div>\n  <div class=\"border border-primary badge choose\"> Choose the maze! </div>\n  <div class = 'list-group'>\n      <a class = 'list-group-item' *ngFor = 'let maze of mazes'>\n          <span class = \"{{'pull-left badge size size-' + maze.size.toLocaleLowerCase()}}\">\n              {{maze.size}}\n          </span>\n          <strong class = 'title'> Maze {{maze.id}} </strong>\n          <div class = 'float-right'>\n            <button type=\"button\" class=\"btn btn-success\" (click) = 'singleMode(maze.id)'>\n                  Single mode\n            </button>\n            &nbsp; &nbsp;\n            <button type=\"button\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#selectModal\">\n                  Competition mode\n            </button>\n          </div>\n          \n          <!--competition room selection-->\n          <div class=\"modal fade\" #modalSelect id=\"selectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Host or guest?</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Would you like to create a room or join a room?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#roomCreateModal\" (click)='createRoomid()'>Create room</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#roomSelectModal\">Join room</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--create a room-->\n          <div class=\"modal fade\" #modalCreate id=\"roomCreateModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Create a room</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Your room id will be: {{roomidToCreate}}. Create?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          (click)='createRoom(maze.id)'\n                          data-toggle=\"modal\">Create!</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--join a room-->\n          <div class=\"modal fade\" #modalJoin id=\"roomSelectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Connect to room</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Please enter the room id:\n                        </div>\n                        <input type = 'text' name = \"connectRoom\" class = 'form-control' \n                          [(ngModel)] = 'roomidToConnect'\n                          (ngModelChange)=\"checkValidId()\"\n                          required placeholder=\"eg: 1234\">\n                          <div *ngIf='showError' class=\"alert alert-warning\" role=\"alert\">\n                            The room id should only contains number 0-9.\n                          </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          (click) = 'joinRoom(maze.id)'\n                          data-toggle=\"modal\">Join!</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--Error message-->\n          <div class=\"modal fade\" id=\"errorModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Error</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          {{message}}\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--ghost button-->\n          <button type=\"button\" #modalOn data-toggle=\"modal\" data-target=\"#errorModal\" [hidden] = 'true'>\n            test\n          </button>\n          \n      </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -361,6 +372,17 @@ module.exports = "<div class = 'container' *ngIf = 'to_show'>\n  <app-navbar></a
 /***/ (function(module, exports) {
 
 module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <div class=\"navbar-brand\">Navbar</div>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n    <ul class=\"navbar-nav ml-auto\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"login()\">Home<span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" *ngIf = 'signUpShow' (click)=\"signup()\">Sign up</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" *ngIf = 'loginShow' (click)=\"login()\">Login</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" *ngIf = 'logoutShow' (click)=\"logout()\">Logout</a>\n      </li>\n    </ul>\n  </div>\n</nav>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/components/new-maze/new-maze.component.html":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/components/new-maze/new-maze.component.html ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class = 'container login' *ngIf='to_show'>\n<app-navbar></app-navbar>\n  <br/>\n  <br/>\n<form #formRef = 'ngForm'>\n  <div> Plase enter maze information </div>\n  <small id=\"widthHelp\" class=\"form-text text-muted\">The ratio of width and height should between 0.5 and 2.</small>\n  <div class=\"form-group\">\n    <label for=\"exampleInputUsername\">Maze width:</label>\n    <input type=\"text\" class=\"form-control\" id=\"exampleInputWidth\" \n      [(ngModel)] = 'width' (ngModelChange)=\"checkValidWidth()\" name = 'width'\n      required placeholder=\"Enter width\">\n    <small id=\"widthHelp\" class=\"form-text text-muted\">Maze width shoule be at least 5 and at most 100.</small>\n    <div *ngIf='widthMessage' class=\"alert alert-warning\" role=\"alert\">\n       {{widthMessage}}\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"exampleInputHeight\">Maze height</label>\n    <input type=\"text\" class=\"form-control\" id=\"exampleInputHeight\" \n      [(ngModel)] = 'height' (ngModelChange)=\"checkValidHeight()\" name = 'height'\n      required placeholder=\"Enter height\">\n    <small id=\"heightHelp\" class=\"form-text text-muted\">Maze height shoule be at least 5 and at most 100.</small>\n    <div *ngIf='heightMessage' class=\"alert alert-warning\" role=\"alert\">\n       {{heightMessage}}\n    </div>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary pull-right\" (click) = 'createMaze()'>Create Maze!</button>\n  <div *ngIf='message' class=\"alert alert-warning\" role=\"alert\">\n    {{message}}\n  </div>\n</form>\n</div>\n"
 
 /***/ }),
 
@@ -468,9 +490,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_maze_list_maze_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/maze-list/maze-list.component */ "./src/app/components/maze-list/maze-list.component.ts");
 /* harmony import */ var _components_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/login-page/login-page.component */ "./src/app/components/login-page/login-page.component.ts");
 /* harmony import */ var _components_maze_single_maze_single_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/maze-single/maze-single.component */ "./src/app/components/maze-single/maze-single.component.ts");
-/* harmony import */ var _auth_token_interceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./auth/token.interceptor */ "./src/app/auth/token.interceptor.ts");
-/* harmony import */ var _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/signin-page/signin-page.component */ "./src/app/components/signin-page/signin-page.component.ts");
-/* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/signin-page/signin-page.component */ "./src/app/components/signin-page/signin-page.component.ts");
+/* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var _components_maze_competition_maze_competition_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/maze-competition/maze-competition.component */ "./src/app/components/maze-competition/maze-competition.component.ts");
+/* harmony import */ var _components_new_maze_new_maze_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/new-maze/new-maze.component */ "./src/app/components/new-maze/new-maze.component.ts");
 
 
 
@@ -495,8 +518,10 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _components_maze_list_maze_list_component__WEBPACK_IMPORTED_MODULE_8__["MazeListComponent"],
             _components_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_9__["LoginPageComponent"],
             _components_maze_single_maze_single_component__WEBPACK_IMPORTED_MODULE_10__["MazeSingleComponent"],
-            _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_12__["SigninPageComponent"],
-            _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__["NavbarComponent"]
+            _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_11__["SigninPageComponent"],
+            _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"],
+            _components_maze_competition_maze_competition_component__WEBPACK_IMPORTED_MODULE_13__["MazeCompetitionComponent"],
+            _components_new_maze_new_maze_component__WEBPACK_IMPORTED_MODULE_14__["NewMazeComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -505,13 +530,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
             _app_routes__WEBPACK_IMPORTED_MODULE_3__["routing"]
         ],
-        providers: [
-            {
-                provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HTTP_INTERCEPTORS"],
-                useClass: _auth_token_interceptor__WEBPACK_IMPORTED_MODULE_11__["TokenInterceptor"],
-                multi: true
-            }
-        ],
+        providers: [],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })
 ], AppModule);
@@ -535,6 +554,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/signin-page/signin-page.component */ "./src/app/components/signin-page/signin-page.component.ts");
 /* harmony import */ var _components_maze_list_maze_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/maze-list/maze-list.component */ "./src/app/components/maze-list/maze-list.component.ts");
 /* harmony import */ var _components_maze_single_maze_single_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/maze-single/maze-single.component */ "./src/app/components/maze-single/maze-single.component.ts");
+/* harmony import */ var _components_maze_competition_maze_competition_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/maze-competition/maze-competition.component */ "./src/app/components/maze-competition/maze-competition.component.ts");
+/* harmony import */ var _components_new_maze_new_maze_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/new-maze/new-maze.component */ "./src/app/components/new-maze/new-maze.component.ts");
+
+
 
 
 
@@ -560,53 +583,23 @@ const routes = [
         component: _components_maze_list_maze_list_component__WEBPACK_IMPORTED_MODULE_3__["MazeListComponent"]
     },
     {
-        path: 'login/:uname/mazes/:mazeid',
-        redirectTo: 'login/:uname/mazes/:mazeid/single'
-    },
-    {
         path: 'login/:uname/mazes/:mazeid/single',
         component: _components_maze_single_maze_single_component__WEBPACK_IMPORTED_MODULE_4__["MazeSingleComponent"]
     },
+    {
+        path: 'login/:uname/mazes/:mazeid/room/:roomid',
+        component: _components_maze_competition_maze_competition_component__WEBPACK_IMPORTED_MODULE_5__["MazeCompetitionComponent"]
+    },
+    {
+        path: 'login/:uname/newmaze',
+        component: _components_new_maze_new_maze_component__WEBPACK_IMPORTED_MODULE_6__["NewMazeComponent"]
+    }
+    // {
+    //     path: '**',
+    //     redirectTo: 'login'
+    // }
 ];
 const routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes);
-
-
-/***/ }),
-
-/***/ "./src/app/auth/token.interceptor.ts":
-/*!*******************************************!*\
-  !*** ./src/app/auth/token.interceptor.ts ***!
-  \*******************************************/
-/*! exports provided: TokenInterceptor */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function() { return TokenInterceptor; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-
-
-let TokenInterceptor = class TokenInterceptor {
-    intercept(req, next) {
-        const idToken = localStorage.getItem("id_token");
-        if (idToken) {
-            console.log('with token');
-            const cloned = req.clone({
-                headers: req.headers.set("Authorization", "Bearer " + idToken)
-            });
-            return next.handle(cloned);
-        }
-        else {
-            console.log('no token');
-            return next.handle(req);
-        }
-    }
-};
-TokenInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
-], TokenInterceptor);
-
 
 
 /***/ }),
@@ -713,6 +706,341 @@ LoginPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/components/maze-competition/maze-competition.component.css":
+/*!****************************************************************************!*\
+  !*** ./src/app/components/maze-competition/maze-competition.component.css ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "canvas { \n    border: 1px solid #000;\n    margin-left: auto;\n    margin-right: auto;\n    display: block;\n}\n.timer {\n    text-align: center;\n    font-size: 40px;\n}\n.start {\n    font-size: 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9tYXplLWNvbXBldGl0aW9uL21hemUtY29tcGV0aXRpb24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHNCQUFzQjtJQUN0QixpQkFBaUI7SUFDakIsa0JBQWtCO0lBQ2xCLGNBQWM7QUFDbEI7QUFDQTtJQUNJLGtCQUFrQjtJQUNsQixlQUFlO0FBQ25CO0FBRUE7SUFDSSxlQUFlO0FBQ25CIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9tYXplLWNvbXBldGl0aW9uL21hemUtY29tcGV0aXRpb24uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImNhbnZhcyB7IFxuICAgIGJvcmRlcjogMXB4IHNvbGlkICMwMDA7XG4gICAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gICAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xuICAgIGRpc3BsYXk6IGJsb2NrO1xufVxuLnRpbWVyIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgZm9udC1zaXplOiA0MHB4O1xufVxuXG4uc3RhcnQge1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/components/maze-competition/maze-competition.component.ts":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/maze-competition/maze-competition.component.ts ***!
+  \***************************************************************************/
+/*! exports provided: MazeCompetitionComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MazeCompetitionComponent", function() { return MazeCompetitionComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_competition_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/competition.service */ "./src/app/services/competition.service.ts");
+
+
+
+
+// import { MAZES } from '../../mock-maze';
+
+
+
+let MazeCompetitionComponent = class MazeCompetitionComponent {
+    constructor(route, router, dataService, authService, competitionService) {
+        this.route = route;
+        this.router = router;
+        this.dataService = dataService;
+        this.authService = authService;
+        this.competitionService = competitionService;
+        this.start_on = false;
+        this.to_show = false;
+        this.is_waiting = false;
+        this.countdowntime = 5;
+        this.winner_name = '';
+        this.winner_time = { value: 0 };
+        // oppo info
+        this.oppo_info = {
+            is_on: false,
+            is_waiting: false,
+            prev: -1,
+            cur: -1,
+            uname: '',
+            flag_connect: false,
+            flag_countdown: false,
+            flag_position: false,
+            flag_disconnect: false,
+            flag_gameend: false
+        };
+        // falsh info
+        this.flash_on = false;
+        // record time
+        this.timecount = { value: 0 };
+    }
+    ngOnInit() {
+        console.log('start!');
+        this.route.params.subscribe(params => {
+            // this.maze = MAZES.find((maze) => maze.id === +params['mazeid']);
+            this.uname = params['uname'];
+            this.roomId = +params['roomid'];
+            this.authService.checktoken(this.uname)
+                .then(res => { this.to_show = true; }, err => {
+                // this.to_show = true
+                this.router.navigate(['/login']);
+            });
+            this.dataService.getmaze(+params['mazeid'])
+                .then(maze => {
+                this.maze = maze;
+                this.nodesize = 500 / this.maze.width;
+                this.cur = this.maze.start;
+                this.oppo_info.prev = this.cur;
+                this.oppo_info.cur = this.cur;
+                this.createcanvas();
+                this.competitionService.init(this.oppo_info, this.roomId, this.winner_time);
+                this.competitionService.connect(this.uname);
+            });
+        });
+    }
+    ngAfterViewInit() {
+        // console.log(this.canvas);
+        // console.log(this.canvas_oppo);
+    }
+    ;
+    ngDoCheck() {
+        if (this.oppo_info.flag_connect) {
+            this.oppo_info.flag_connect = false;
+            this.oppo_info.cur = this.maze.start;
+            this.oppo_info.prev = this.maze.start;
+            this.disconnectModalCancel.nativeElement.click();
+        }
+        if (this.oppo_info.flag_countdown) {
+            this.oppo_info.flag_countdown = false;
+            this.countdown();
+        }
+        if (this.oppo_info.flag_position) {
+            this.oppo_info.flag_position = false;
+            this.drawnode(this.cx_oppo, this.oppo_info.prev, 'white');
+            this.drawnode(this.cx_oppo, this.oppo_info.cur, 'red');
+            this.oppo_info.prev = this.oppo_info.cur;
+        }
+        if (this.oppo_info.flag_disconnect) {
+            this.oppo_info.flag_disconnect = false;
+            if (this.start_on === true) {
+                this.StartOrReset();
+                this.timecount.value = 0;
+                this.winner_name = '';
+            }
+            this.gameendModalCancel.nativeElement.click();
+            this.modalCountdown.nativeElement.click();
+            this.modalDisconnect.nativeElement.click();
+        }
+        if (this.oppo_info.flag_gameend) {
+            this.oppo_info.flag_gameend = false;
+            this.StartOrReset();
+            this.modalGameend.nativeElement.click();
+        }
+    }
+    createcanvas() {
+        const canvasEl = this.canvas.nativeElement;
+        ;
+        const canvas_oppoEl = this.canvas_oppo.nativeElement;
+        ;
+        this.cx = canvasEl.getContext('2d');
+        this.cx_oppo = canvas_oppoEl.getContext('2d');
+        canvasEl.width = this.nodesize * this.maze.width;
+        canvasEl.height = this.nodesize * this.maze.height;
+        canvas_oppoEl.width = this.nodesize * this.maze.width;
+        canvas_oppoEl.height = this.nodesize * this.maze.height;
+        // initial color
+        for (let i = 0; i < this.maze.graph.length; i++) {
+            if (this.maze.graph[i] === '0') {
+                this.drawnode(this.cx_oppo, i, 'black');
+                this.drawnode(this.cx, i, 'black');
+            }
+            else if (this.maze.start === i) {
+                this.drawnode(this.cx_oppo, i, 'red');
+                this.drawnode(this.cx, i, 'red');
+            }
+            else if (this.maze.end === i) {
+                this.drawnode(this.cx_oppo, i, 'blue');
+                this.drawnode(this.cx, i, 'blue');
+            }
+        }
+        ;
+    }
+    // function to draw each node in maze
+    drawnode(instance, i, color) {
+        let x = i % this.maze.width;
+        let y = (i - x) / this.maze.width;
+        instance.fillStyle = color;
+        instance.fillRect(x * this.nodesize, y * this.nodesize, this.nodesize, this.nodesize);
+    }
+    ;
+    // make current node to flash
+    flashnode() {
+        this.flash_on = !this.flash_on;
+        let color = 'white';
+        if (this.flash_on)
+            color = 'red';
+        this.drawnode(this.cx_oppo, this.oppo_info.cur, color);
+        this.drawnode(this.cx, this.cur, color);
+    }
+    // waiting for oppoent
+    waiting() {
+        this.is_waiting = true;
+        this.competitionService.ready(true);
+    }
+    // count down
+    countdown() {
+        if (this.is_waiting && this.oppo_info.is_waiting) {
+            this.is_waiting = false;
+            this.oppo_info.is_waiting = false;
+            this.modalOn.nativeElement.click();
+            var countdownInterval = setInterval(() => {
+                this.countdowntime -= 1;
+                console.log(this.countdowntime);
+                if (this.countdowntime === 0) {
+                    this.countdowntime = 5;
+                    this.modalCountdown.nativeElement.click();
+                    if (this.oppo_info.is_on) {
+                        this.StartOrReset();
+                    }
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+        }
+    }
+    // start or reset the game
+    StartOrReset() {
+        if (!this.start_on) {
+            this.timerCount = setInterval(() => {
+                this.timecount.value += 0.01;
+            }, 10);
+            this.timerFlash = setInterval(() => {
+                this.flashnode();
+            }, 400);
+            this.start_on = true;
+            this.subscriptionKeypress = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(document, 'keydown').subscribe(e => {
+                this.handleKeyDown(e);
+            });
+        }
+        else {
+            this.start_on = false;
+            clearInterval(this.timerFlash);
+            clearInterval(this.timerCount);
+            this.subscriptionKeypress.unsubscribe();
+            if (this.winner_name === '') {
+                this.winner_name = this.oppo_info.uname;
+            }
+            if (this.cur != this.maze.end) {
+                this.drawnode(this.cx, this.cur, 'white');
+            }
+            if (this.oppo_info.cur != this.maze.end) {
+                this.drawnode(this.cx_oppo, this.oppo_info.cur, 'white');
+            }
+            this.drawnode(this.cx, this.maze.end, 'blue');
+            this.drawnode(this.cx_oppo, this.maze.end, 'blue');
+            this.cur = this.maze.start;
+            this.oppo_info.cur = this.maze.start;
+            this.oppo_info.prev = this.maze.start;
+            this.drawnode(this.cx, this.cur, 'red');
+            this.drawnode(this.cx_oppo, this.cur, 'red');
+        }
+    }
+    //close gameend modal
+    gameendClose() {
+        this.timecount.value = 0;
+        this.winner_time.value = 0;
+        this.winner_name = '';
+    }
+    // move the position when press keys
+    handleKeyDown(event) {
+        // left, up, right, down
+        let move_list = [-1, -this.maze.width, 1, this.maze.width];
+        let id = (+event.keyCode - 37);
+        if (id >= 0 && id < 4) {
+            let nex = this.cur + move_list[id];
+            if (nex >= 0 && nex < this.maze.graph.length && this.maze.graph[nex] === "1") {
+                this.drawnode(this.cx, this.cur, 'white');
+                this.cur = nex;
+                if (this.cur === this.maze.end) {
+                    this.winner_name = this.uname;
+                    this.competitionService.gameend(this.timecount);
+                    // this.gameend();
+                }
+                else {
+                    this.competitionService.updateLocation(this.cur);
+                    this.drawnode(this.cx, this.cur, 'red');
+                }
+            }
+        }
+        ;
+    }
+    // clear timer
+    ngOnDestroy() {
+        if (this.timerFlash) {
+            clearInterval(this.timerFlash);
+        }
+        if (this.timerCount) {
+            clearInterval(this.timerCount);
+        }
+        if (this.subscriptionKeypress) {
+            this.subscriptionKeypress.unsubscribe();
+        }
+    }
+};
+MazeCompetitionComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _services_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"] },
+    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] },
+    { type: _services_competition_service__WEBPACK_IMPORTED_MODULE_6__["CompetitionService"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('canvas_oppo', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "canvas_oppo", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('canvas', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "canvas", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalOn', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "modalOn", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalCountdown', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "modalCountdown", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalGameend', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "modalGameend", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalDisconnect', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "modalDisconnect", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('gameendModalCancel', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "gameendModalCancel", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('disconnectModalCancel', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeCompetitionComponent.prototype, "disconnectModalCancel", void 0);
+MazeCompetitionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-maze-competition',
+        template: __webpack_require__(/*! raw-loader!./maze-competition.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/maze-competition/maze-competition.component.html"),
+        styles: [__webpack_require__(/*! ./maze-competition.component.css */ "./src/app/components/maze-competition/maze-competition.component.css")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+        _services_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"],
+        _services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"],
+        _services_competition_service__WEBPACK_IMPORTED_MODULE_6__["CompetitionService"]])
+], MazeCompetitionComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/maze-list/maze-list.component.css":
 /*!**************************************************************!*\
   !*** ./src/app/components/maze-list/maze-list.component.css ***!
@@ -739,18 +1067,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+/* harmony import */ var _services_room_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/room.service */ "./src/app/services/room.service.ts");
+
 
 
 
 
 
 let MazeListComponent = class MazeListComponent {
-    constructor(route, router, dataService, authService) {
+    constructor(route, router, dataService, authService, roomService) {
         this.route = route;
         this.router = router;
         this.dataService = dataService;
         this.authService = authService;
+        this.roomService = roomService;
         this.to_show = false;
+        this.showError = false;
     }
     ngOnInit() {
         this.route.params.subscribe(params => {
@@ -769,6 +1101,41 @@ let MazeListComponent = class MazeListComponent {
     ngOnDestroy() {
         this.subsriptionMazes.unsubscribe();
     }
+    createRoomid() {
+        this.roomService.getRoomid()
+            .then(roomid => this.roomidToCreate = +roomid.content);
+        // data === parseInt(data, 10)
+    }
+    createRoom(id) {
+        this.roomService.createRoom(this.uname, this.roomidToCreate, id)
+            .then(roomid => {
+            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToCreate]);
+        }, error => {
+            this.message = 'The room is already in used. Please recreate.';
+            this.modalOn.nativeElement.click();
+            console.log(this.message);
+        });
+        // data === parseInt(data, 10)
+    }
+    joinRoom(id) {
+        this.roomService.joinRoom(this.uname, +this.roomidToConnect, id)
+            .then(roomid => {
+            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToConnect]);
+        }, error => {
+            this.message = 'Room is not avaiable now!';
+            this.modalOn.nativeElement.click();
+            console.log(this.message);
+        });
+        // data === parseInt(data, 10)
+    }
+    checkValidId() {
+        if (this.roomidToConnect === '' || /^\d+$/.test(this.roomidToConnect)) {
+            this.showError = false;
+        }
+        else {
+            this.showError = true;
+        }
+    }
     singleMode(id) {
         this.router.navigate(['/login', this.uname, 'mazes', id, 'single']);
     }
@@ -780,8 +1147,13 @@ MazeListComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
     { type: _services_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"] },
-    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }
+    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
+    { type: _services_room_service__WEBPACK_IMPORTED_MODULE_5__["RoomService"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalOn', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MazeListComponent.prototype, "modalOn", void 0);
 MazeListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-maze-list',
@@ -791,7 +1163,8 @@ MazeListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
         _services_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"],
-        _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+        _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+        _services_room_service__WEBPACK_IMPORTED_MODULE_5__["RoomService"]])
 ], MazeListComponent);
 
 
@@ -880,7 +1253,6 @@ let MazeSingleComponent = class MazeSingleComponent {
     }
     ;
     createcanvas() {
-        console.log('here!');
         const canvasEl = this.canvas.nativeElement;
         this.cx = canvasEl.getContext('2d');
         canvasEl.width = this.nodesize * this.maze.width;
@@ -1102,6 +1474,157 @@ NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/components/new-maze/new-maze.component.css":
+/*!************************************************************!*\
+  !*** ./src/app/components/new-maze/new-maze.component.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbmV3LW1hemUvbmV3LW1hemUuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/new-maze/new-maze.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/components/new-maze/new-maze.component.ts ***!
+  \***********************************************************/
+/*! exports provided: NewMazeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewMazeComponent", function() { return NewMazeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+
+
+
+
+
+const DEFAULT_MAZE = Object.freeze({
+    'id': 0,
+    'graph': '',
+    'width': 0,
+    'height': 0,
+    'start': 0,
+    'end': 0,
+    'size': ''
+});
+let NewMazeComponent = class NewMazeComponent {
+    constructor(route, router, dataService, authService) {
+        this.route = route;
+        this.router = router;
+        this.dataService = dataService;
+        this.authService = authService;
+        this.to_show = false;
+        this.maze = Object.assign({}, DEFAULT_MAZE);
+    }
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            // this.maze = MAZES.find((maze) => maze.id === +params['mazeid']);
+            this.uname = params['uname'];
+            this.authService.checktoken(this.uname)
+                .then(res => { this.to_show = true; }, err => {
+                this.router.navigate(['/login']);
+            });
+        });
+    }
+    createMaze() {
+        if (this.widthMessage) {
+            this.message = this.widthMessage;
+        }
+        else if (this.heightMessage) {
+            this.message = this.heightMessage;
+        }
+        else if (+this.width / (+this.height) < 0.5) {
+            this.message = 'width is too small compare to height!';
+        }
+        else if (+this.width / (+this.height) > 2) {
+            this.message = 'height is too small compare to witdth!';
+        }
+        else {
+            this.maze.width = +this.width;
+            this.maze.height = +this.height;
+            this.dataService.addmaze(this.maze);
+        }
+    }
+    checkValidWidth() {
+        if (this.width) {
+            if (/^\d+$/.test(this.width)) {
+                var value = Number(this.width);
+                if (this.width !== '0' && this.width[0] === '0') {
+                    this.widthMessage = 'The width cannot start with 0.';
+                }
+                else if (value < 5) {
+                    this.widthMessage = 'The width should be at least 5.';
+                }
+                else if (value > 100) {
+                    this.widthMessage = 'The width should be at most 100.';
+                }
+                else {
+                    this.widthMessage = '';
+                }
+            }
+            else {
+                this.widthMessage = 'The width must be a positive integer without +.';
+            }
+        }
+        else {
+            this.widthMessage = '';
+        }
+    }
+    checkValidHeight() {
+        if (this.height) {
+            if (/^\d+$/.test(this.height)) {
+                var value = Number(this.height);
+                if (this.height !== '0' && this.height[0] === '0') {
+                    this.heightMessage = 'The height cannot start with 0.';
+                }
+                else if (value < 5) {
+                    this.heightMessage = 'The height should be at least 5.';
+                }
+                else if (value > 100) {
+                    this.heightMessage = 'The height should be at most 100.';
+                }
+                else {
+                    this.heightMessage = '';
+                }
+            }
+            else {
+                this.heightMessage = 'The height must be a positive integer without +.';
+            }
+        }
+        else {
+            this.heightMessage = '';
+        }
+    }
+};
+NewMazeComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"] },
+    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"] }
+];
+NewMazeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-new-maze',
+        template: __webpack_require__(/*! raw-loader!./new-maze.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/new-maze/new-maze.component.html"),
+        styles: [__webpack_require__(/*! ./new-maze.component.css */ "./src/app/components/new-maze/new-maze.component.css")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+        _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"],
+        _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
+], NewMazeComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/signin-page/signin-page.component.css":
 /*!******************************************************************!*\
   !*** ./src/app/components/signin-page/signin-page.component.css ***!
@@ -1299,6 +1822,80 @@ AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/services/competition.service.ts":
+/*!*************************************************!*\
+  !*** ./src/app/services/competition.service.ts ***!
+  \*************************************************/
+/*! exports provided: CompetitionService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompetitionService", function() { return CompetitionService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let CompetitionService = class CompetitionService {
+    constructor() { }
+    init(oppo_info, roomId, winner_time) {
+        this.CompetitionSocket = io(window.location.origin, { query: 'roomId=' + roomId });
+        this.CompetitionSocket.on("message", message => {
+            console.log("message received from the server: " + message);
+        });
+        this.CompetitionSocket.on("oppo_connect", (uname) => {
+            oppo_info.is_on = true;
+            oppo_info.uname = uname;
+            oppo_info.is_waiting = false;
+            oppo_info.flag_connect = true;
+        });
+        this.CompetitionSocket.on("oppo_disconnect", () => {
+            oppo_info.uname = '';
+            oppo_info.is_waiting = false;
+            oppo_info.is_on = false;
+            oppo_info.flag_disconnect = true;
+        });
+        this.CompetitionSocket.on("ready", (is_waiting) => {
+            oppo_info.is_waiting = true;
+        });
+        this.CompetitionSocket.on("countdown", (is_waiting) => {
+            oppo_info.is_waiting = true;
+            oppo_info.flag_countdown = true;
+        });
+        this.CompetitionSocket.on("gameend", (time) => {
+            oppo_info.is_waiting = false;
+            oppo_info.flag_gameend = true;
+            winner_time.value = +(time.toFixed(2));
+        });
+        this.CompetitionSocket.on("updateLocation", (location) => {
+            oppo_info.cur = +location;
+            oppo_info.flag_position = true;
+        });
+    }
+    connect(uname) {
+        this.CompetitionSocket.emit("oppo_connect", uname);
+    }
+    ready(is_waiting) {
+        this.CompetitionSocket.emit("ready", is_waiting);
+    }
+    updateLocation(cur) {
+        this.CompetitionSocket.emit("updateLocation", cur);
+    }
+    gameend(timecount) {
+        this.CompetitionSocket.emit('gameend', timecount.value);
+    }
+};
+CompetitionService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+], CompetitionService);
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/data.service.ts":
 /*!******************************************!*\
   !*** ./src/app/services/data.service.ts ***!
@@ -1387,6 +1984,13 @@ let DataService = class DataService {
             .then((res) => res)
             .catch(this.handleError);
     }
+    addmaze(maze) {
+        const options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post(`api/v1/mazes`, maze, options)
+            .toPromise()
+            .then((res) => res)
+            .catch(this.handleError);
+    }
     handleError(error) {
         return Promise.reject(error.body || error);
     }
@@ -1400,6 +2004,73 @@ DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
 ], DataService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/room.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/room.service.ts ***!
+  \******************************************/
+/*! exports provided: RoomService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RoomService", function() { return RoomService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+
+
+
+let RoomService = class RoomService {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+    }
+    getRoomid() {
+        return this.httpClient.get(`api/v1/rooms`)
+            .toPromise()
+            .then((res) => res)
+            .catch(this.handleError);
+    }
+    createRoom(uname, roomid, mazeid) {
+        const options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
+        const data = {
+            roomid: roomid,
+            mazeid: mazeid
+        };
+        return this.httpClient.post(`api/v1/rooms/create/${uname}`, data, options)
+            .toPromise()
+            .then((res) => res)
+            .catch(this.handleError);
+    }
+    joinRoom(uname, roomid, mazeid) {
+        const options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
+        const data = {
+            roomid: roomid,
+            mazeid: mazeid
+        };
+        console.log('create!');
+        return this.httpClient.post(`api/v1/rooms/join/${uname}`, data, options)
+            .toPromise()
+            .then((res) => res)
+            .catch(this.handleError);
+    }
+    handleError(error) {
+        return Promise.reject(error.body || error);
+    }
+};
+RoomService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+RoomService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+], RoomService);
 
 
 

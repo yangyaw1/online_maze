@@ -1,0 +1,14 @@
+canvas { 
+    border: 1px solid #000;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.timer {
+    text-align: center;
+    font-size: 40px;
+}
+
+.start {
+    font-size: 20px;
+}

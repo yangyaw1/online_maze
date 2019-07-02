@@ -3,6 +3,8 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { SigninPageComponent } from './components/signin-page/signin-page.component';
 import { MazeListComponent } from './components/maze-list/maze-list.component';
 import { MazeSingleComponent } from './components/maze-single/maze-single.component';
+import { MazeCompetitionComponent } from './components/maze-competition/maze-competition.component';
+import { NewMazeComponent } from './components/new-maze/new-maze.component';
 
 const routes: Routes = [
     // Homework
@@ -24,13 +26,17 @@ const routes: Routes = [
         component: MazeListComponent
     },
     {
-        path: 'login/:uname/mazes/:mazeid',
-        redirectTo: 'login/:uname/mazes/:mazeid/single'
-    },
-    {
         path: 'login/:uname/mazes/:mazeid/single',
         component: MazeSingleComponent
     },
+    {
+        path: 'login/:uname/mazes/:mazeid/room/:roomid',
+        component: MazeCompetitionComponent
+    },
+    {
+        path: 'login/:uname/newmaze',
+        component: NewMazeComponent
+    }
     // {
     //     path: '**',
     //     redirectTo: 'login'

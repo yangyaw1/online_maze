@@ -82,7 +82,6 @@ export class MazeSingleComponent implements OnInit, AfterViewInit, OnDestroy {
   
   
   createcanvas() {
-    console.log('here!')
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     this.cx = canvasEl.getContext('2d');
     

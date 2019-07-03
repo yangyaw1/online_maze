@@ -267,6 +267,9 @@ export class MazeCompetitionComponent implements OnInit, DoCheck, AfterViewInit,
     let move_list = [-1, -this.maze.width, 1, this.maze.width];
     let id = (+event.keyCode-37);
     if(id >= 0 && id < 4){
+      if(id !== 3){
+        event.preventDefault();
+      }
       let nex = this.cur + move_list[id];
       if(nex >= 0 && nex < this.maze.graph.length && this.maze.graph[nex] === "1"){
         this.drawnode(this.cx, this.cur, 'white');

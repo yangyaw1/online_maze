@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { SigninPageComponent } from './components/signin-page/signin-page.component';
+import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { MazeListComponent } from './components/maze-list/maze-list.component';
 import { MazeSingleComponent } from './components/maze-single/maze-single.component';
 import { MazeCompetitionComponent } from './components/maze-competition/maze-competition.component';
@@ -18,8 +18,8 @@ const routes: Routes = [
         component: LoginPageComponent
     },
     {
-        path: 'signin',
-        component: SigninPageComponent
+        path: 'signup',
+        component: SignupPageComponent
     },
     {
         path: 'login/:uname/mazes',

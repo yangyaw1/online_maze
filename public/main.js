@@ -349,7 +349,7 @@ module.exports = "<div class='container'>\n<app-navbar></app-navbar>\n<br/>\n<br
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class = 'container' *ngIf = 'to_show'>\n<app-navbar></app-navbar>\n<br/>\n<br/>\n<div class=\"jumbotron\">\n  <h1 class=\"display-4\">Welcome, {{uname}}!!!!!</h1>\n  <p class=\"lead\">This is an online maze game platform. Please choose any maze you like to play</p>\n  <hr class=\"my-4\">\n  <p>Want to create a random maze?</p>\n  <p class=\"lead\">\n    <a class=\"btn btn-primary btn-lg\" [routerLink]=\"['/login', uname, 'newmaze']\" role=\"button\">Create random maze</a>\n  </p>\n</div>\n  <div class=\"border border-primary badge choose\"> Choose the maze! </div>\n  <div class = 'list-group'>\n      <a class = 'list-group-item' *ngFor = 'let maze of mazes'>\n          <span class = \"{{'pull-left badge size size-' + maze.size.toLocaleLowerCase()}}\">\n              {{maze.size}}\n          </span>\n          <strong class = 'title'> Maze {{maze.id}} </strong>\n          <div class = 'float-right'>\n            <button type=\"button\" class=\"btn btn-success\" (click) = 'singleMode(maze.id)'>\n                  Single mode\n            </button>\n            &nbsp; &nbsp;\n            <button type=\"button\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#selectModal\">\n                  Competition mode\n            </button>\n          </div>\n          \n          <!--competition room selection-->\n          <div class=\"modal fade\" #modalSelect id=\"selectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Host or guest?</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Would you like to create a room or join a room?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#roomCreateModal\" (click)='createRoomid()'>Create room</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#roomSelectModal\">Join room</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--create a room-->\n          <div class=\"modal fade\" #modalCreate id=\"roomCreateModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Create a room</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Your room id will be: {{roomidToCreate}}. Create?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          (click)='createRoom(maze.id)'\n                          data-toggle=\"modal\">Create!</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--join a room-->\n          <div class=\"modal fade\" #modalJoin id=\"roomSelectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Connect to room</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Please enter the room id:\n                        </div>\n                        <input type = 'text' name = \"connectRoom\" class = 'form-control' \n                          [(ngModel)] = 'roomidToConnect'\n                          (ngModelChange)=\"checkValidId()\"\n                          required placeholder=\"eg: 1234\">\n                          <div *ngIf='showError' class=\"alert alert-warning\" role=\"alert\">\n                            The room id should only contains number 0-9.\n                          </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          (click) = 'joinRoom(maze.id)'\n                          data-toggle=\"modal\">Join!</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--Error message-->\n          <div class=\"modal fade\" id=\"errorModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Error</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          {{message}}\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--ghost button-->\n          <button type=\"button\" #modalOn data-toggle=\"modal\" data-target=\"#errorModal\" [hidden] = 'true'>\n            test\n          </button>\n          \n      </a>\n  </div>\n</div>\n"
+module.exports = "<div class = 'container' *ngIf = 'to_show'>\n<app-navbar></app-navbar>\n<br/>\n<br/>\n<div class=\"jumbotron\">\n  <h5 class=\"lead\">Welcome, {{uname}}!</h5>\n  <p class=\"lead\">This is an online maze game platform. Please choose any maze you like to play</p>\n  <hr class=\"my-4\">\n  <p>Want to create a random maze?</p>\n  <p class=\"lead\">\n    <a class=\"btn btn-primary btn-lg\" [routerLink]=\"['/login', uname, 'newmaze']\" role=\"button\">Create random maze</a>\n  </p>\n</div>\n  <!--<div class=\"border border-primary badge choose\"> Choose the maze! </div>-->\n  <div class = 'list-group'>\n      <a class = 'list-group-item' *ngFor = 'let maze of mazes'>\n          <span class = \"{{'pull-left badge size size-' + maze.size.toLocaleLowerCase()}}\">\n              {{maze.size}}\n          </span>\n          <strong class = 'title'> Maze {{maze.id}} </strong>\n          <div class = 'float-right'>\n            <button type=\"button\" class=\"btn btn-success\" (click) = 'singleMode(maze.id)'>\n                  Single mode\n            </button>\n            &nbsp; &nbsp;\n            <button type=\"button\" class=\"btn btn-success\" data-toggle=\"modal\" (click) = 'mazeIdSelect(maze.id)' data-target=\"#selectModal\">\n                  Competition mode\n            </button>\n          </div>\n          \n          <!--competition room selection-->\n          <div class=\"modal fade\" #modalSelect id=\"selectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Host or guest?</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Would you like to create a room or join a room?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#roomCreateModal\" (click)='createRoomid()'>Create room</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#roomSelectModal\">Join room</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--create a room-->\n          <div class=\"modal fade\" #modalCreate id=\"roomCreateModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Create a room</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Your room id will be: {{roomidToCreate}}. Create?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          (click)='createRoom(maze.id)'\n                          data-toggle=\"modal\">Create!</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--join a room-->\n          <div class=\"modal fade\" #modalJoin id=\"roomSelectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Connect to room</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Please enter the room id:\n                        </div>\n                        <input type = 'text' name = \"connectRoom\" class = 'form-control' \n                          [(ngModel)] = 'roomidToConnect'\n                          (ngModelChange)=\"checkValidId()\"\n                          required placeholder=\"eg: 1234\">\n                          <div *ngIf='showError' class=\"alert alert-warning\" role=\"alert\">\n                            The room id should only contains number 0-9.\n                          </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          (click) = 'joinRoom(maze.id)'\n                          data-toggle=\"modal\">Join!</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--Error message-->\n          <div class=\"modal fade\" id=\"errorModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Error</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          {{message}}\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          data-toggle=\"modal\" data-target=\"#selectModal\">Cancel</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n          \n          <!--ghost button-->\n          <button type=\"button\" #modalOn data-toggle=\"modal\" data-target=\"#errorModal\" [hidden] = 'true'>\n            test\n          </button>\n          \n      </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -360,7 +360,7 @@ module.exports = "<div class = 'container' *ngIf = 'to_show'>\n<app-navbar></app
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class = 'container' *ngIf = 'to_show'>\n  <app-navbar></app-navbar>\n  <br/>\n  <br/>\n    <div (window:beforeunload)=\"saveProcess()\"></div>\n    <div class = 'timer'>\n        <div> Welcome, {{uname}} !</div>\n        <div> Time used: {{timecount.toFixed(2)}}s. </div>\n        <button type = 'button' class = 'btn btn-primary'\n        (click) = 'StartOrReset()'> {{buttonmessage}}  </button>\n    </div>\n    <canvas #canvas> </canvas>\n    \n    <button type=\"button\" #modalOn data-toggle=\"modal\" data-target=\"#selectModal\" [hidden] = 'true'>\n        test\n    </button>\n\n    <div class=\"modal fade\"  id=\"selectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Restore Process</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Would you like to restore the game last time?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          (click) = 'resetProcess()'>No</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          >Yes</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n</div>\n"
+module.exports = "<div class = 'container' *ngIf = 'to_show'>\n  <app-navbar></app-navbar>\n  <br/>\n  <br/>\n    <div (window:beforeunload)=\"saveProcess()\"></div>\n    <div class = 'timer'>\n        <div> Welcome, {{uname}} !\n        <div> Time used: {{timecount.toFixed(2)}}s. </div>\n        <button type = 'button' class = 'btn btn-primary'\n        (click) = 'StartOrReset()'> {{buttonmessage}}  </button>\n    </div>\n    <canvas #canvas> </canvas>\n    \n    <button type=\"button\" #modalOn data-toggle=\"modal\" data-target=\"#selectModal\" [hidden] = 'true'>\n        test\n    </button>\n\n    <div class=\"modal fade\"  id=\"selectModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\">\n                <div class=\"modal-dialog\" role=\"document\">\n                    <div class=\"modal-content\">\n                        <div class=\"modal-header\">\n                          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Restore Process</h5>\n                          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                          </button>\n                        </div>\n                        <div class=\"modal-body\">\n                          Would you like to restore the game last time?\n                        </div>\n                        <div class=\"modal-footer\">\n                          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                          (click) = 'resetProcess()'>No</button>\n                          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n                          >Yes</button>\n                        </div>\n                    </div>\n                </div>\n          </div>\n</div>\n"
 
 /***/ }),
 
@@ -382,18 +382,18 @@ module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class = 'container login' *ngIf='to_show'>\n<app-navbar></app-navbar>\n  <br/>\n  <br/>\n<form #formRef = 'ngForm'>\n  <div> Plase enter maze information </div>\n  <small id=\"widthHelp\" class=\"form-text text-muted\">The ratio of width and height should between 0.5 and 2.</small>\n  <div class=\"form-group\">\n    <label for=\"exampleInputUsername\">Maze width:</label>\n    <input type=\"text\" class=\"form-control\" id=\"exampleInputWidth\" \n      [(ngModel)] = 'width' (ngModelChange)=\"checkValidWidth()\" name = 'width'\n      required placeholder=\"Enter width\">\n    <small id=\"widthHelp\" class=\"form-text text-muted\">Maze width shoule be at least 5 and at most 100.</small>\n    <div *ngIf='widthMessage' class=\"alert alert-warning\" role=\"alert\">\n       {{widthMessage}}\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"exampleInputHeight\">Maze height</label>\n    <input type=\"text\" class=\"form-control\" id=\"exampleInputHeight\" \n      [(ngModel)] = 'height' (ngModelChange)=\"checkValidHeight()\" name = 'height'\n      required placeholder=\"Enter height\">\n    <small id=\"heightHelp\" class=\"form-text text-muted\">Maze height shoule be at least 5 and at most 100.</small>\n    <div *ngIf='heightMessage' class=\"alert alert-warning\" role=\"alert\">\n       {{heightMessage}}\n    </div>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary pull-right\" (click) = 'createMaze()'>Create Maze!</button>\n  <div *ngIf='message' class=\"alert alert-warning\" role=\"alert\">\n    {{message}}\n  </div>\n</form>\n</div>\n"
+module.exports = "<div class = 'container login' *ngIf='to_show'>\n<app-navbar></app-navbar>\n  <br/>\n  <br/>\n<form #formRef = 'ngForm' *ngIf = 'create_on'>\n  <div> Plase enter maze information </div>\n  <small id=\"widthHelp\" class=\"form-text text-muted\">The ratio of width and height should between 0.8 and 1.2.</small>\n  <div class=\"form-group\">\n    <label for=\"exampleInputUsername\">Maze width:</label>\n    <input type=\"text\" class=\"form-control\" id=\"exampleInputWidth\" \n      [(ngModel)] = 'width' (ngModelChange)=\"checkValidWidth()\" name = 'width'\n      required placeholder=\"Enter width\">\n    <small id=\"widthHelp\" class=\"form-text text-muted\">Maze width shoule be an odd number between 5 and 79.</small>\n    <div *ngIf='widthMessage' class=\"alert alert-warning\" role=\"alert\">\n       {{widthMessage}}\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"exampleInputHeight\">Maze height</label>\n    <input type=\"text\" class=\"form-control\" id=\"exampleInputHeight\" \n      [(ngModel)] = 'height' (ngModelChange)=\"checkValidHeight()\" name = 'height'\n      required placeholder=\"Enter height\">\n    <small id=\"heightHelp\" class=\"form-text text-muted\">Maze height shoule be an odd number between 5 and 79.</small>\n    <div *ngIf='heightMessage' class=\"alert alert-warning\" role=\"alert\">\n       {{heightMessage}}\n    </div>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary pull-right\" (click) = 'createMaze()'>Create Maze!</button>\n  <div *ngIf='message' class=\"alert alert-warning\" role=\"alert\">\n    {{message}}\n  </div>\n\n</form>\n<div class = 'to_submit' [hidden]=\"!canvas_on\">\n   <div> Would you like to create this maze?</div>\n   <div>\n     <button type=\"submit\" class=\"btn btn-primary pull-right\" (click) = 'addMaze()'>Yes!</button>\n     &nbsp; &nbsp;\n     <button type=\"submit\" class=\"btn btn-secondary pull-right\" (click) = 'cancelCreate()'>No!</button>\n   </div>\n   <canvas #canvas> </canvas>\n</div>\n\n<!--Submit message-->\n<div class=\"modal fade\" id=\"submitMessageModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n          <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Submit information</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n              <div class=\"modal-body\">\n                {{submitMessage}}\n              </div>\n              <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\n                data-toggle=\"modal\">Cancel</button>\n              </div>\n          </div>\n      </div>\n</div>\n\n<!--ghost button-->\n<button type=\"button\" #modalSubmit data-toggle=\"modal\" data-target=\"#submitMessageModal\" [hidden] = 'true'>\n  test\n</button>\n</div>\n"
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/components/signin-page/signin-page.component.html":
+/***/ "./node_modules/raw-loader/index.js!./src/app/components/signup-page/signup-page.component.html":
 /*!*********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/components/signin-page/signin-page.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/components/signup-page/signup-page.component.html ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class = 'container signin'>\n<app-navbar></app-navbar>\n  <br/>\n  <br/>\n<form #formRef = 'ngForm'>\n  <div class=\"form-group\">\n    <label for=\"exampleInputUsername\">User Name:</label>\n    <input type=\"username\" class=\"form-control\" id=\"exampleInputUsername\" \n      [(ngModel)] = 'uname' name = 'username'\n      required placeholder=\"Enter username\">\n    <small id=\"usernameHelp\" class=\"form-text text-muted\">We'll never share your username with anyone else.</small>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"exampleInputPassword\">Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"exampleInputPassword\" \n      [(ngModel)] = 'password' name = 'password'\n      required placeholder=\"Enter password\">\n  </div>\n  <div *ngIf='password !== confirmPassword && confirmPassword' class=\"alert alert-warning\" role=\"alert\">\n    Password mismath!\n  </div>\n  <div class=\"form-group\">\n    <label for=\"exampleInputConfirmPassword\">Confirm Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"exampleInputConfirmPassword\" \n      [(ngModel)] = 'confirmPassword' name = 'confirmPassword'\n      required placeholder=\"Confirm password\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary pull-right\" (click) = 'signinCheck()'>Signin</button>\n  <div *ngIf='message' class=\"alert alert-warning\" role=\"alert\">\n    {{message}}\n  </div>\n</form>\n</div>\n"
+module.exports = "<div class = 'container signup'>\n<app-navbar></app-navbar>\n  <br/>\n  <br/>\n<form #formRef = 'ngForm'>\n  <div class=\"form-group\">\n    <label for=\"exampleInputUsername\">User Name:</label>\n    <input type=\"username\" class=\"form-control\" id=\"exampleInputUsername\" \n      [(ngModel)] = 'uname' name = 'username'\n      required placeholder=\"Enter username\">\n    <small id=\"usernameHelp\" class=\"form-text text-muted\">We'll never share your username with anyone else.</small>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"exampleInputPassword\">Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"exampleInputPassword\" \n      [(ngModel)] = 'password' name = 'password'\n      required placeholder=\"Enter password\">\n  </div>\n  <div *ngIf='password !== confirmPassword && confirmPassword' class=\"alert alert-warning\" role=\"alert\">\n    Password mismath!\n  </div>\n  <div class=\"form-group\">\n    <label for=\"exampleInputConfirmPassword\">Confirm Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"exampleInputConfirmPassword\" \n      [(ngModel)] = 'confirmPassword' name = 'confirmPassword'\n      required placeholder=\"Confirm password\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary pull-right\" (click) = 'signupCheck()'>Sign Up</button>\n  <div *ngIf='message' class=\"alert alert-warning\" role=\"alert\">\n    {{message}}\n  </div>\n</form>\n</div>\n"
 
 /***/ }),
 
@@ -490,7 +490,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_maze_list_maze_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/maze-list/maze-list.component */ "./src/app/components/maze-list/maze-list.component.ts");
 /* harmony import */ var _components_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/login-page/login-page.component */ "./src/app/components/login-page/login-page.component.ts");
 /* harmony import */ var _components_maze_single_maze_single_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/maze-single/maze-single.component */ "./src/app/components/maze-single/maze-single.component.ts");
-/* harmony import */ var _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/signin-page/signin-page.component */ "./src/app/components/signin-page/signin-page.component.ts");
+/* harmony import */ var _components_signup_page_signup_page_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/signup-page/signup-page.component */ "./src/app/components/signup-page/signup-page.component.ts");
 /* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
 /* harmony import */ var _components_maze_competition_maze_competition_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/maze-competition/maze-competition.component */ "./src/app/components/maze-competition/maze-competition.component.ts");
 /* harmony import */ var _components_new_maze_new_maze_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/new-maze/new-maze.component */ "./src/app/components/new-maze/new-maze.component.ts");
@@ -518,7 +518,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _components_maze_list_maze_list_component__WEBPACK_IMPORTED_MODULE_8__["MazeListComponent"],
             _components_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_9__["LoginPageComponent"],
             _components_maze_single_maze_single_component__WEBPACK_IMPORTED_MODULE_10__["MazeSingleComponent"],
-            _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_11__["SigninPageComponent"],
+            _components_signup_page_signup_page_component__WEBPACK_IMPORTED_MODULE_11__["SignupPageComponent"],
             _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"],
             _components_maze_competition_maze_competition_component__WEBPACK_IMPORTED_MODULE_13__["MazeCompetitionComponent"],
             _components_new_maze_new_maze_component__WEBPACK_IMPORTED_MODULE_14__["NewMazeComponent"]
@@ -551,7 +551,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routing", function() { return routing; });
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _components_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/login-page/login-page.component */ "./src/app/components/login-page/login-page.component.ts");
-/* harmony import */ var _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/signin-page/signin-page.component */ "./src/app/components/signin-page/signin-page.component.ts");
+/* harmony import */ var _components_signup_page_signup_page_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/signup-page/signup-page.component */ "./src/app/components/signup-page/signup-page.component.ts");
 /* harmony import */ var _components_maze_list_maze_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/maze-list/maze-list.component */ "./src/app/components/maze-list/maze-list.component.ts");
 /* harmony import */ var _components_maze_single_maze_single_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/maze-single/maze-single.component */ "./src/app/components/maze-single/maze-single.component.ts");
 /* harmony import */ var _components_maze_competition_maze_competition_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/maze-competition/maze-competition.component */ "./src/app/components/maze-competition/maze-competition.component.ts");
@@ -575,8 +575,8 @@ const routes = [
         component: _components_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_1__["LoginPageComponent"]
     },
     {
-        path: 'signin',
-        component: _components_signin_page_signin_page_component__WEBPACK_IMPORTED_MODULE_2__["SigninPageComponent"]
+        path: 'signup',
+        component: _components_signup_page_signup_page_component__WEBPACK_IMPORTED_MODULE_2__["SignupPageComponent"]
     },
     {
         path: 'login/:uname/mazes',
@@ -955,6 +955,9 @@ let MazeCompetitionComponent = class MazeCompetitionComponent {
         let move_list = [-1, -this.maze.width, 1, this.maze.width];
         let id = (+event.keyCode - 37);
         if (id >= 0 && id < 4) {
+            if (id !== 3) {
+                event.preventDefault();
+            }
             let nex = this.cur + move_list[id];
             if (nex >= 0 && nex < this.maze.graph.length && this.maze.graph[nex] === "1") {
                 this.drawnode(this.cx, this.cur, 'white');
@@ -1048,7 +1051,7 @@ MazeCompetitionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " .badge.size {\n\tpadding-top: 0.1em;\n\tcolor: #fbfdfa;\n\tfont-size: 15px;\n\tmargin: auto;\n}\n .title {\n\tfont-size: 20px;\n}\n .size-small {\n\tbackground-color: #42ebf4;\n}\n .size-medium {\n\tbackground-color: #92cf5c;\n}\n .size-large {\n    background-color: #dd0d1e;\n}\n .choose {\n   font-size: 30px;\n   background-color: #F46E2B;\n}\n .single {\n\tpadding-top: 0.6em;\n\tcolor: #fbfdfa;\n\tfont-size: 12px;\n\tbackground-color: #42ebf4;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9tYXplLWxpc3QvbWF6ZS1saXN0LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkNBQUM7Q0FDQSxrQkFBa0I7Q0FDbEIsY0FBYztDQUNkLGVBQWU7Q0FDZixZQUFZO0FBQ2I7Q0FDQztDQUNBLGVBQWU7QUFDaEI7Q0FDQztDQUNBLHlCQUF5QjtBQUMxQjtDQUNDO0NBQ0EseUJBQXlCO0FBQzFCO0NBQ0M7SUFDRyx5QkFBeUI7QUFDN0I7Q0FDQTtHQUNHLGVBQWU7R0FDZix5QkFBeUI7QUFDNUI7Q0FFQztDQUNBLGtCQUFrQjtDQUNsQixjQUFjO0NBQ2QsZUFBZTtDQUNmLHlCQUF5QjtBQUMxQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbWF6ZS1saXN0L21hemUtbGlzdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiIC5iYWRnZS5zaXplIHtcblx0cGFkZGluZy10b3A6IDAuMWVtO1xuXHRjb2xvcjogI2ZiZmRmYTtcblx0Zm9udC1zaXplOiAxNXB4O1xuXHRtYXJnaW46IGF1dG87XG59XG4gLnRpdGxlIHtcblx0Zm9udC1zaXplOiAyMHB4O1xufVxuIC5zaXplLXNtYWxsIHtcblx0YmFja2dyb3VuZC1jb2xvcjogIzQyZWJmNDtcbn1cbiAuc2l6ZS1tZWRpdW0ge1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjOTJjZjVjO1xufVxuIC5zaXplLWxhcmdlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGQwZDFlO1xufVxuLmNob29zZSB7XG4gICBmb250LXNpemU6IDMwcHg7XG4gICBiYWNrZ3JvdW5kLWNvbG9yOiAjRjQ2RTJCO1xufVxuXG4gLnNpbmdsZSB7XG5cdHBhZGRpbmctdG9wOiAwLjZlbTtcblx0Y29sb3I6ICNmYmZkZmE7XG5cdGZvbnQtc2l6ZTogMTJweDtcblx0YmFja2dyb3VuZC1jb2xvcjogIzQyZWJmNDtcbn0iXX0= */"
+module.exports = " .badge.size {\n\tpadding-top: 0.1em;\n\tcolor: #fbfdfa;\n\tfont-size: 15px;\n\tmargin: auto;\n}\n .title {\n\tfont-size: 20px;\n}\n .size-small {\n\tbackground-color: #42ebf4;\n}\n .size-medium {\n\tbackground-color: #92cf5c;\n}\n .size-large {\n    background-color: #dd0d1e;\n}\n .choose {\n   font-size: 25px;\n}\n .single {\n\tpadding-top: 0.6em;\n\tcolor: #fbfdfa;\n\tfont-size: 12px;\n\tbackground-color: #42ebf4;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9tYXplLWxpc3QvbWF6ZS1saXN0LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkNBQUM7Q0FDQSxrQkFBa0I7Q0FDbEIsY0FBYztDQUNkLGVBQWU7Q0FDZixZQUFZO0FBQ2I7Q0FDQztDQUNBLGVBQWU7QUFDaEI7Q0FDQztDQUNBLHlCQUF5QjtBQUMxQjtDQUNDO0NBQ0EseUJBQXlCO0FBQzFCO0NBQ0M7SUFDRyx5QkFBeUI7QUFDN0I7Q0FDQTtHQUNHLGVBQWU7QUFDbEI7Q0FFQztDQUNBLGtCQUFrQjtDQUNsQixjQUFjO0NBQ2QsZUFBZTtDQUNmLHlCQUF5QjtBQUMxQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbWF6ZS1saXN0L21hemUtbGlzdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiIC5iYWRnZS5zaXplIHtcblx0cGFkZGluZy10b3A6IDAuMWVtO1xuXHRjb2xvcjogI2ZiZmRmYTtcblx0Zm9udC1zaXplOiAxNXB4O1xuXHRtYXJnaW46IGF1dG87XG59XG4gLnRpdGxlIHtcblx0Zm9udC1zaXplOiAyMHB4O1xufVxuIC5zaXplLXNtYWxsIHtcblx0YmFja2dyb3VuZC1jb2xvcjogIzQyZWJmNDtcbn1cbiAuc2l6ZS1tZWRpdW0ge1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjOTJjZjVjO1xufVxuIC5zaXplLWxhcmdlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGQwZDFlO1xufVxuLmNob29zZSB7XG4gICBmb250LXNpemU6IDI1cHg7XG59XG5cbiAuc2luZ2xlIHtcblx0cGFkZGluZy10b3A6IDAuNmVtO1xuXHRjb2xvcjogI2ZiZmRmYTtcblx0Zm9udC1zaXplOiAxMnB4O1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjNDJlYmY0O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -1107,9 +1110,9 @@ let MazeListComponent = class MazeListComponent {
         // data === parseInt(data, 10)
     }
     createRoom(id) {
-        this.roomService.createRoom(this.uname, this.roomidToCreate, id)
+        this.roomService.createRoom(this.uname, this.roomidToCreate, this.mazeid)
             .then(roomid => {
-            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToCreate]);
+            this.router.navigate(['/login', this.uname, 'mazes', this.mazeid, 'room', this.roomidToCreate]);
         }, error => {
             this.message = 'The room is already in used. Please recreate.';
             this.modalOn.nativeElement.click();
@@ -1118,15 +1121,18 @@ let MazeListComponent = class MazeListComponent {
         // data === parseInt(data, 10)
     }
     joinRoom(id) {
-        this.roomService.joinRoom(this.uname, +this.roomidToConnect, id)
+        this.roomService.joinRoom(this.uname, +this.roomidToConnect, this.mazeid)
             .then(roomid => {
-            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToConnect]);
+            this.router.navigate(['/login', this.uname, 'mazes', this.mazeid, 'room', this.roomidToConnect]);
         }, error => {
             this.message = 'Room is not avaiable now!';
             this.modalOn.nativeElement.click();
             console.log(this.message);
         });
         // data === parseInt(data, 10)
+    }
+    mazeIdSelect(mazeid) {
+        this.mazeid = mazeid;
     }
     checkValidId() {
         if (this.roomidToConnect === '' || /^\d+$/.test(this.roomidToConnect)) {
@@ -1232,7 +1238,7 @@ let MazeSingleComponent = class MazeSingleComponent {
                 .then(maze => {
                 this.maze = maze;
                 console.log(this.maze.width);
-                this.nodesize = 500 / this.maze.width;
+                this.nodesize = 450 / this.maze.width;
                 // check if cur is stored
                 this.dataService.restoreProcess(this.uname, +params['mazeid'])
                     .then(data => {
@@ -1328,6 +1334,9 @@ let MazeSingleComponent = class MazeSingleComponent {
         let move_list = [-1, -this.maze.width, 1, this.maze.width];
         let id = (+event.keyCode - 37);
         if (id >= 0 && id < 4) {
+            if (id !== 3) {
+                event.preventDefault();
+            }
             let nex = this.cur + move_list[id];
             if (nex >= 0 && nex < this.maze.graph.length && this.maze.graph[nex] === "1") {
                 this.drawnode(this.cur, 'white');
@@ -1440,13 +1449,13 @@ let NavbarComponent = class NavbarComponent {
             this.logoutShow = false;
             this.signUpShow = true;
         }
-        else if (this.router.url === '/signin') {
+        else if (this.router.url === '/signup') {
             this.logoutShow = false;
             this.loginShow = true;
         }
     }
     signup() {
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/signup']);
     }
     login() {
         this.router.navigate(['/login']);
@@ -1481,7 +1490,7 @@ NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbmV3LW1hemUvbmV3LW1hemUuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "canvas { \n    border: 1px solid #000;\n    margin-left: auto;\n    margin-right: auto;\n    display: block;\n}\n\n.to_submit {\n    text-align: center;\n    font-size: 40px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9uZXctbWF6ZS9uZXctbWF6ZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksc0JBQXNCO0lBQ3RCLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsY0FBYztBQUNsQjs7QUFFQTtJQUNJLGtCQUFrQjtJQUNsQixlQUFlO0FBQ25CIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9uZXctbWF6ZS9uZXctbWF6ZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiY2FudmFzIHsgXG4gICAgYm9yZGVyOiAxcHggc29saWQgIzAwMDtcbiAgICBtYXJnaW4tbGVmdDogYXV0bztcbiAgICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gICAgZGlzcGxheTogYmxvY2s7XG59XG5cbi50b19zdWJtaXQge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBmb250LXNpemU6IDQwcHg7XG59Il19 */"
 
 /***/ }),
 
@@ -1522,6 +1531,8 @@ let NewMazeComponent = class NewMazeComponent {
         this.authService = authService;
         this.to_show = false;
         this.maze = Object.assign({}, DEFAULT_MAZE);
+        this.canvas_on = false;
+        this.create_on = true;
     }
     ngOnInit() {
         this.route.params.subscribe(params => {
@@ -1540,18 +1551,74 @@ let NewMazeComponent = class NewMazeComponent {
         else if (this.heightMessage) {
             this.message = this.heightMessage;
         }
-        else if (+this.width / (+this.height) < 0.5) {
+        else if (+this.width / (+this.height) < 0.8) {
             this.message = 'width is too small compare to height!';
         }
-        else if (+this.width / (+this.height) > 2) {
+        else if (+this.width / (+this.height) > 1.2) {
             this.message = 'height is too small compare to witdth!';
         }
         else {
-            this.maze.width = +this.width;
-            this.maze.height = +this.height;
-            this.dataService.addmaze(this.maze);
+            this.message = '';
+            this.dataService.createmaze(+this.width, +this.height)
+                .then(res => {
+                this.maze = res;
+                this.canvas_on = true;
+                this.width = '';
+                this.height = '';
+                this.nodesize = 500 / this.maze.width;
+                this.create_on = false;
+                this.createcanvas();
+            }, err => {
+                console.log('Cannot create maze');
+            });
         }
     }
+    createcanvas() {
+        const canvasEl = this.canvas.nativeElement;
+        this.cx = canvasEl.getContext('2d');
+        canvasEl.width = this.nodesize * this.maze.width;
+        canvasEl.height = this.nodesize * this.maze.height;
+        // initial color
+        for (let i = 0; i < this.maze.graph.length; i++) {
+            if (this.maze.graph[i] === '0') {
+                this.drawnode(i, 'black');
+            }
+            else if (this.maze.start === i) {
+                this.drawnode(i, 'red');
+            }
+            else if (this.maze.end === i) {
+                this.drawnode(i, 'blue');
+            }
+        }
+        ;
+    }
+    addMaze() {
+        this.dataService.addmaze(this.maze)
+            .then(res => {
+            this.submitMessage = 'Successfully add the maze to maze list!';
+            this.modalSubmit.nativeElement.click();
+            this.canvas_on = false;
+            this.create_on = true;
+            this.maze = Object.assign({}, DEFAULT_MAZE);
+        }, err => {
+            this.submitMessage = 'Cannot add this maze to maze list!';
+            this.modalSubmit.nativeElement.click();
+            this.canvas_on = false;
+            this.create_on = true;
+            this.maze = Object.assign({}, DEFAULT_MAZE);
+        });
+    }
+    cancelCreate() {
+        this.canvas_on = false;
+        this.create_on = true;
+    }
+    drawnode(i, color) {
+        let x = i % this.maze.width;
+        let y = (i - x) / this.maze.width;
+        this.cx.fillStyle = color;
+        this.cx.fillRect(x * this.nodesize, y * this.nodesize, this.nodesize, this.nodesize);
+    }
+    ;
     checkValidWidth() {
         if (this.width) {
             if (/^\d+$/.test(this.width)) {
@@ -1562,8 +1629,11 @@ let NewMazeComponent = class NewMazeComponent {
                 else if (value < 5) {
                     this.widthMessage = 'The width should be at least 5.';
                 }
-                else if (value > 100) {
-                    this.widthMessage = 'The width should be at most 100.';
+                else if (value > 79) {
+                    this.widthMessage = 'The width should be at most 79.';
+                }
+                else if (value % 2 === 0) {
+                    this.widthMessage = 'The width should an odd number.';
                 }
                 else {
                     this.widthMessage = '';
@@ -1587,8 +1657,11 @@ let NewMazeComponent = class NewMazeComponent {
                 else if (value < 5) {
                     this.heightMessage = 'The height should be at least 5.';
                 }
-                else if (value > 100) {
-                    this.heightMessage = 'The height should be at most 100.';
+                else if (value > 79) {
+                    this.heightMessage = 'The height should be at most 79.';
+                }
+                else if (value % 2 === 0) {
+                    this.heightMessage = 'The height should an odd number.';
                 }
                 else {
                     this.heightMessage = '';
@@ -1609,6 +1682,14 @@ NewMazeComponent.ctorParameters = () => [
     { type: _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"] },
     { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('canvas', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], NewMazeComponent.prototype, "canvas", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalSubmit', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], NewMazeComponent.prototype, "modalSubmit", void 0);
 NewMazeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-new-maze',
@@ -1625,27 +1706,27 @@ NewMazeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/components/signin-page/signin-page.component.css":
+/***/ "./src/app/components/signup-page/signup-page.component.css":
 /*!******************************************************************!*\
-  !*** ./src/app/components/signin-page/signin-page.component.css ***!
+  !*** ./src/app/components/signup-page/signup-page.component.css ***!
   \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".signin {\n    border: 1px;\n    margin: auto;\n    display: block;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zaWduaW4tcGFnZS9zaWduaW4tcGFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixjQUFjO0FBQ2xCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9zaWduaW4tcGFnZS9zaWduaW4tcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNpZ25pbiB7XG4gICAgYm9yZGVyOiAxcHg7XG4gICAgbWFyZ2luOiBhdXRvO1xuICAgIGRpc3BsYXk6IGJsb2NrO1xufSJdfQ== */"
+module.exports = ".signup {\n    border: 1px;\n    margin: auto;\n    display: block;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zaWdudXAtcGFnZS9zaWdudXAtcGFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixjQUFjO0FBQ2xCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9zaWdudXAtcGFnZS9zaWdudXAtcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNpZ251cCB7XG4gICAgYm9yZGVyOiAxcHg7XG4gICAgbWFyZ2luOiBhdXRvO1xuICAgIGRpc3BsYXk6IGJsb2NrO1xufSJdfQ== */"
 
 /***/ }),
 
-/***/ "./src/app/components/signin-page/signin-page.component.ts":
+/***/ "./src/app/components/signup-page/signup-page.component.ts":
 /*!*****************************************************************!*\
-  !*** ./src/app/components/signin-page/signin-page.component.ts ***!
+  !*** ./src/app/components/signup-page/signup-page.component.ts ***!
   \*****************************************************************/
-/*! exports provided: SigninPageComponent */
+/*! exports provided: SignupPageComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SigninPageComponent", function() { return SigninPageComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupPageComponent", function() { return SignupPageComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
@@ -1654,7 +1735,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let SigninPageComponent = class SigninPageComponent {
+let SignupPageComponent = class SignupPageComponent {
     constructor(authService, router) {
         this.authService = authService;
         this.router = router;
@@ -1665,7 +1746,7 @@ let SigninPageComponent = class SigninPageComponent {
         this.message = '';
         this.confirmPassword = '';
     }
-    signinCheck() {
+    signupCheck() {
         if (!this.uname) {
             this.message = 'Please enter username!';
             return;
@@ -1678,7 +1759,7 @@ let SigninPageComponent = class SigninPageComponent {
             this.message = 'Password mismatchs!';
             return;
         }
-        this.authService.signin(this.uname, this.password)
+        this.authService.signup(this.uname, this.password)
             .then((res) => {
             this.message = 'Correct';
             this.login();
@@ -1693,19 +1774,19 @@ let SigninPageComponent = class SigninPageComponent {
         // this.subscriptionUsers.unsubscribe();
     }
 };
-SigninPageComponent.ctorParameters = () => [
+SignupPageComponent.ctorParameters = () => [
     { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
-SigninPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+SignupPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-signin-page',
-        template: __webpack_require__(/*! raw-loader!./signin-page.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/signin-page/signin-page.component.html"),
-        styles: [__webpack_require__(/*! ./signin-page.component.css */ "./src/app/components/signin-page/signin-page.component.css")]
+        selector: 'app-signup-page',
+        template: __webpack_require__(/*! raw-loader!./signup-page.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/signup-page/signup-page.component.html"),
+        styles: [__webpack_require__(/*! ./signup-page.component.css */ "./src/app/components/signup-page/signup-page.component.css")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
-], SigninPageComponent);
+], SignupPageComponent);
 
 
 
@@ -1749,14 +1830,14 @@ let AuthService = class AuthService {
         })
             .catch(this.handleError);
     }
-    signin(uname, password) {
+    signup(uname, password) {
         this.user = {
             uname: uname,
             password: password,
             uid: 0
         };
         const options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post(`api/v1/signin`, this.user, options)
+        return this.httpClient.post(`api/v1/signup`, this.user, options)
             .toPromise()
             .then((res) => {
             console.log('do!');
@@ -1984,7 +2065,19 @@ let DataService = class DataService {
             .then((res) => res)
             .catch(this.handleError);
     }
+    createmaze(width, height) {
+        var data = {
+            width: width,
+            height: height
+        };
+        const options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post(`api/v1/maze-creation`, data, options)
+            .toPromise()
+            .then((res) => res)
+            .catch(this.handleError);
+    }
     addmaze(maze) {
+        console.log(maze);
         const options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post(`api/v1/mazes`, maze, options)
             .toPromise()

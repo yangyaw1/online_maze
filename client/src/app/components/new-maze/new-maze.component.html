@@ -2,15 +2,15 @@
 <app-navbar></app-navbar>
   <br/>
   <br/>
-<form #formRef = 'ngForm'>
+<form #formRef = 'ngForm' *ngIf = 'create_on'>
   <div> Plase enter maze information </div>
-  <small id="widthHelp" class="form-text text-muted">The ratio of width and height should between 0.5 and 2.</small>
+  <small id="widthHelp" class="form-text text-muted">The ratio of width and height should between 0.8 and 1.2.</small>
   <div class="form-group">
     <label for="exampleInputUsername">Maze width:</label>
     <input type="text" class="form-control" id="exampleInputWidth" 
       [(ngModel)] = 'width' (ngModelChange)="checkValidWidth()" name = 'width'
       required placeholder="Enter width">
-    <small id="widthHelp" class="form-text text-muted">Maze width shoule be at least 5 and at most 100.</small>
+    <small id="widthHelp" class="form-text text-muted">Maze width shoule be an odd number between 5 and 79.</small>
     <div *ngIf='widthMessage' class="alert alert-warning" role="alert">
        {{widthMessage}}
     </div>
@@ -20,7 +20,7 @@
     <input type="text" class="form-control" id="exampleInputHeight" 
       [(ngModel)] = 'height' (ngModelChange)="checkValidHeight()" name = 'height'
       required placeholder="Enter height">
-    <small id="heightHelp" class="form-text text-muted">Maze height shoule be at least 5 and at most 100.</small>
+    <small id="heightHelp" class="form-text text-muted">Maze height shoule be an odd number between 5 and 79.</small>
     <div *ngIf='heightMessage' class="alert alert-warning" role="alert">
        {{heightMessage}}
     </div>
@@ -29,5 +29,41 @@
   <div *ngIf='message' class="alert alert-warning" role="alert">
     {{message}}
   </div>
+
 </form>
+<div class = 'to_submit' [hidden]="!canvas_on">
+   <div> Would you like to create this maze?</div>
+   <div>
+     <button type="submit" class="btn btn-primary pull-right" (click) = 'addMaze()'>Yes!</button>
+     &nbsp; &nbsp;
+     <button type="submit" class="btn btn-secondary pull-right" (click) = 'cancelCreate()'>No!</button>
+   </div>
+   <canvas #canvas> </canvas>
+</div>
+
+<!--Submit message-->
+<div class="modal fade" id="submitMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Submit information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {{submitMessage}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                data-toggle="modal">Cancel</button>
+              </div>
+          </div>
+      </div>
+</div>
+
+<!--ghost button-->
+<button type="button" #modalSubmit data-toggle="modal" data-target="#submitMessageModal" [hidden] = 'true'>
+  test
+</button>
 </div>

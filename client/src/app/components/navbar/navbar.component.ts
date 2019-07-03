@@ -19,14 +19,14 @@ export class NavbarComponent implements OnInit {
     if(this.router.url === '/login'){
       this.logoutShow = false
       this.signUpShow = true
-    } else if (this.router.url === '/signin'){
+    } else if (this.router.url === '/signup'){
       this.logoutShow = false
       this.loginShow = true
     }
   }
 
   signup() {
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/signup']);
   }
   
   login() {

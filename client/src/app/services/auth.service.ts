@@ -25,14 +25,14 @@ export class AuthService {
                .catch(this.handleError);
   }
   
-  signin(uname: string, password: string): Promise<Message>{
+  signup(uname: string, password: string): Promise<Message>{
     this.user = {
       uname: uname,
       password: password,
       uid: 0
     }
     const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
-    return this.httpClient.post(`api/v1/signin`, this.user, options)
+    return this.httpClient.post(`api/v1/signup`, this.user, options)
                .toPromise()
                .then((res: any) => {
                  console.log('do!')

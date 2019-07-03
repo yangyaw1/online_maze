@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const rpcClient = require('../rpc_client/rpc_client');
 
 const dataService = require('../services/dataService');
 const authService = require('../services/authService');
@@ -25,11 +26,25 @@ router.get('/mazes/:id', (req, res) => {
           res.status(400).send("Invalid maze ID!");
       });
 });
+
+router.post('/maze-creation', jsonParser, (req, res) => {
+    const width = req.body.width;
+    const height = req.body.height;
+    rpcClient.maze_creation(width, height, result => {
+       res.json(JSON.parse(result));
+    }, error => {
+        res.status(400).send("cannot create maze!");
+    });
+});
+
 router.post('/mazes', jsonParser, (req, res) => {
     const maze = req.body;
-    console.log('coming to create maze!');
-    console.log(maze);
-    res.json(maze);
+    dataService.addmaze(maze)
+      .then(data => {
+          res.json(data);
+      }, error => {
+          res.status(400).send("cannot submit maze!");
+      });
 });
 
 router.get('/users', (req, res) => {
@@ -61,9 +76,9 @@ router.post('/login', jsonParser, (req, res) => {
        });
 });
 
-router.post('/signin', jsonParser, (req, res) => {
+router.post('/signup', jsonParser, (req, res) => {
     console.log(req.body);
-    authService.signin(req.body)
+    authService.signup(req.body)
        .then(auth => {
            dataService.adduser(req.body)
             .then(data =>{

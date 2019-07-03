@@ -20,6 +20,7 @@ export class MazeListComponent implements OnInit, OnDestroy  {
   roomidToConnect: string;
   message: string;
   showError: boolean = false;
+  mazeid: number;
   
   @ViewChild('modalOn', {static: false}) modalOn:ElementRef;
   
@@ -56,9 +57,9 @@ export class MazeListComponent implements OnInit, OnDestroy  {
   }
   
   createRoom(id: number){
-    this.roomService.createRoom(this.uname, this.roomidToCreate, id)
+    this.roomService.createRoom(this.uname, this.roomidToCreate, this.mazeid)
       .then(roomid => {
-            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToCreate]);
+            this.router.navigate(['/login', this.uname, 'mazes', this.mazeid, 'room', this.roomidToCreate]);
         }, error => {
             this.message = 'The room is already in used. Please recreate.'
             this.modalOn.nativeElement.click();
@@ -68,9 +69,9 @@ export class MazeListComponent implements OnInit, OnDestroy  {
   }
   
   joinRoom(id: number){
-    this.roomService.joinRoom(this.uname, +this.roomidToConnect, id)
+    this.roomService.joinRoom(this.uname, +this.roomidToConnect, this.mazeid)
       .then(roomid => {
-            this.router.navigate(['/login', this.uname, 'mazes', id, 'room', this.roomidToConnect]);
+            this.router.navigate(['/login', this.uname, 'mazes', this.mazeid, 'room', this.roomidToConnect]);
         }, error => {
             this.message = 'Room is not avaiable now!';
             this.modalOn.nativeElement.click();
@@ -78,7 +79,9 @@ export class MazeListComponent implements OnInit, OnDestroy  {
         });
     // data === parseInt(data, 10)
   }
-  
+  mazeIdSelect(mazeid){
+    this.mazeid = mazeid;
+  }
   checkValidId() {
     if(this.roomidToConnect === '' || /^\d+$/.test(this.roomidToConnect)){
       this.showError = false;

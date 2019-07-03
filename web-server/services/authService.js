@@ -54,7 +54,7 @@ const login = function(newuser) {
     });
 };
 
-const signin = function(newuser) {
+const signup = function(newuser) {
     return new Promise((resolve, reject) => {
         usermodel.findOne({uname: newuser.uname}, (err, user) => {
             if (err) {
@@ -104,7 +104,7 @@ const tokenCheck = function(token, uname){
 
 module.exports = {
     login: login,
-    signin: signin,
+    signup: signup,
     userpwcheck: userpwcheck,
     tokenCheck: tokenCheck
 }

@@ -89,12 +89,25 @@ export class DataService {
       .catch(this.handleError);
   }
   
-  addmaze(maze: Maze): Promise<Maze>{
+  createmaze(width: number, height: number): Promise<Maze>{
+    var data = {
+      width: width,
+      height: height
+    }
     const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
-    return this.httpClient.post(`api/v1/mazes`, maze, options)
+    return this.httpClient.post(`api/v1/maze-creation`, data, options)
            .toPromise()
            .then((res:any) => res)
            .catch(this.handleError);
+  }
+  
+  addmaze(maze: Maze): Promise<Message>{
+    console.log(maze);
+    const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
+    return this.httpClient.post(`api/v1/mazes`, maze, options)
+          .toPromise()
+          .then((res:any) => res)
+          .catch(this.handleError);
   }
   
   private handleError(error: any): Promise<any> {

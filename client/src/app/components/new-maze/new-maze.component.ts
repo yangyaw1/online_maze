@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { Maze } from '../../models/maze.model';
 import { Subscription } from 'rxjs';
 import { Observable, fromEvent } from 'rxjs';
@@ -30,6 +30,15 @@ export class NewMazeComponent implements OnInit {
   widthMessage: string;
   heightMessage: string;
   message: string;
+  canvas_on: boolean = false;
+  nodesize: number;
+  create_on: boolean = true;
+  submitMessage: string;
+  
+  @ViewChild('canvas', {static: false}) public canvas: ElementRef;
+  @ViewChild('modalSubmit', {static: false}) public modalSubmit: ElementRef;
+  private cx: CanvasRenderingContext2D;
+  
   constructor(private route: ActivatedRoute,
               private router: Router,
               private dataService: DataService,
@@ -53,16 +62,75 @@ export class NewMazeComponent implements OnInit {
       this.message = this.widthMessage;
     } else if(this.heightMessage){
       this.message = this.heightMessage;
-    } else if(+this.width/(+this.height) < 0.5){
+    } else if(+this.width/(+this.height) < 0.8){
       this.message = 'width is too small compare to height!'
-    } else if(+this.width/(+this.height) > 2){
+    } else if(+this.width/(+this.height) > 1.2){
       this.message = 'height is too small compare to witdth!'
     } else{
-      this.maze.width = +this.width;
-      this.maze.height = +this.height;
-      this.dataService.addmaze(this.maze);
+      this.message = '';
+      this.dataService.createmaze(+this.width, +this.height)
+          .then(res => {
+            this.maze = res;
+            this.canvas_on = true;
+            this.width = '';
+            this.height = '';
+            this.nodesize = 500/this.maze.width;
+            this.create_on = false;
+            this.createcanvas();
+          }, err =>{
+            console.log('Cannot create maze');
+          });
     }
   }
+  
+  createcanvas() {
+    const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
+    this.cx = canvasEl.getContext('2d');
+    
+    canvasEl.width = this.nodesize*this.maze.width;
+    canvasEl.height = this.nodesize*this.maze.height;
+    
+    // initial color
+    for(let i = 0; i < this.maze.graph.length; i++){
+        if(this.maze.graph[i] === '0'){
+          this.drawnode(i, 'black');
+        } else if(this.maze.start === i){
+          this.drawnode(i, 'red');
+        } else if(this.maze.end === i){
+          this.drawnode(i, 'blue');
+        }
+    };
+  }
+  
+  addMaze(){
+    this.dataService.addmaze(this.maze)
+        .then(res => {
+             this.submitMessage = 'Successfully add the maze to maze list!';
+             this.modalSubmit.nativeElement.click();
+             this.canvas_on = false;
+             this.create_on = true;
+             this.maze = Object.assign({}, DEFAULT_MAZE);
+          },
+             err => { 
+             this.submitMessage = 'Cannot add this maze to maze list!';
+             this.modalSubmit.nativeElement.click();
+             this.canvas_on = false;
+             this.create_on = true;
+             this.maze = Object.assign({}, DEFAULT_MAZE);
+          });
+  }
+  
+  cancelCreate(){
+    this.canvas_on = false;
+    this.create_on = true;
+  }
+  
+  drawnode(i, color){
+    let x = i%this.maze.width;
+    let y = (i-x)/this.maze.width;
+    this.cx.fillStyle = color;
+    this.cx.fillRect(x*this.nodesize, y*this.nodesize, this.nodesize, this.nodesize);
+  };
    
   checkValidWidth(){
     if(this.width){
@@ -72,8 +140,10 @@ export class NewMazeComponent implements OnInit {
           this.widthMessage = 'The width cannot start with 0.'
         } else if(value < 5){
           this.widthMessage = 'The width should be at least 5.'
-        } else if(value > 100){
-          this.widthMessage = 'The width should be at most 100.'
+        } else if(value > 79){
+          this.widthMessage = 'The width should be at most 79.'
+        } else if(value%2 === 0){
+          this.widthMessage = 'The width should an odd number.'
         } else {
           this.widthMessage = '';
         }
@@ -93,8 +163,10 @@ export class NewMazeComponent implements OnInit {
           this.heightMessage = 'The height cannot start with 0.'
         } else if(value < 5){
           this.heightMessage = 'The height should be at least 5.'
-        } else if(value > 100){
-          this.heightMessage = 'The height should be at most 100.'
+        } else if(value > 79){
+          this.heightMessage = 'The height should be at most 79.'
+        } else if(value%2 === 0){
+          this.heightMessage = 'The height should an odd number.'
         } else {
           this.heightMessage = '';
         }

@@ -3,7 +3,7 @@
 <br/>
 <br/>
 <div class="jumbotron">
-  <h1 class="display-4">Welcome, {{uname}}!!!!!</h1>
+  <h5 class="lead">Welcome, {{uname}}!</h5>
   <p class="lead">This is an online maze game platform. Please choose any maze you like to play</p>
   <hr class="my-4">
   <p>Want to create a random maze?</p>
@@ -11,7 +11,7 @@
     <a class="btn btn-primary btn-lg" [routerLink]="['/login', uname, 'newmaze']" role="button">Create random maze</a>
   </p>
 </div>
-  <div class="border border-primary badge choose"> Choose the maze! </div>
+  <!--<div class="border border-primary badge choose"> Choose the maze! </div>-->
   <div class = 'list-group'>
       <a class = 'list-group-item' *ngFor = 'let maze of mazes'>
           <span class = "{{'pull-left badge size size-' + maze.size.toLocaleLowerCase()}}">
@@ -23,7 +23,7 @@
                   Single mode
             </button>
             &nbsp; &nbsp;
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#selectModal">
+            <button type="button" class="btn btn-success" data-toggle="modal" (click) = 'mazeIdSelect(maze.id)' data-target="#selectModal">
                   Competition mode
             </button>
           </div>

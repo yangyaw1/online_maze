@@ -120,12 +120,38 @@ const getmaze = function(id) {
     });
 };
 
+const addmaze = function(maze) {
+    return new Promise((resolve, reject) => {
+        mazemodel.findOne({graph: maze.graph}, (err, data) => {
+            if(err){
+                reject(err);
+            } else{   
+                if(data) {
+                    reject('Maze already exists!');
+                } else {
+                    mazemodel.count({}, (error, count) => {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            maze.id = count + 1;
+                            const mongomaze = new mazemodel(maze);
+                            mongomaze.save();
+                            resolve('Created!');
+                        }
+                    });
+                }
+            }
+        });
+    });
+};
+
 module.exports = {
     getusers: getusers,
     getuser: getuser,
     adduser: adduser,
     getmazes: getmazes,
     getmaze: getmaze,
+    addmaze: addmaze,
     saveProcess: saveProcess,
     restoreProcess: restoreProcess
 };

@@ -57,7 +57,7 @@ export class MazeSingleComponent implements OnInit, AfterViewInit, OnDestroy {
           .then(maze => {
             this.maze = maze;
             console.log(this.maze.width);
-            this.nodesize = 500/this.maze.width;
+            this.nodesize = 450/this.maze.width;
             // check if cur is stored
             this.dataService.restoreProcess(this.uname, +params['mazeid'])
                 .then(data => {
@@ -155,6 +155,9 @@ export class MazeSingleComponent implements OnInit, AfterViewInit, OnDestroy {
     let move_list = [-1, -this.maze.width, 1, this.maze.width];
     let id = (+event.keyCode-37);
     if(id >= 0 && id < 4){
+      if(id !== 3){
+        event.preventDefault();
+      }
       let nex = this.cur + move_list[id];
       if(nex >= 0 && nex < this.maze.graph.length && this.maze.graph[nex] === "1"){
         this.drawnode(this.cur, 'white');
